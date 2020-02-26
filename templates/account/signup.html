@@ -36,6 +36,7 @@
                 {% endif %}
 
              <br>
+              {{ form.username | add_class:"form-control" | attr:"placeholder:Username" }}<br>
               {{ form.email | add_class:"form-control" | attr:"placeholder:email" }}<br>
               {{ form.password1 | add_class:"form-control" | attr:"placeholder:password"  }}<br>
               {{ form.password2 | add_class:"form-control" | attr:"placeholder:confirm password" }}<br>
