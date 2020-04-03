@@ -1,7 +1,12 @@
 from django.db import models
 
 # Create your models here.
-class Physiotherapist(models.Model):
+class Nurse(models.Model):
+    gender_choices = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('U', 'Undisclosed'),
+    )
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     age = models.IntegerField()
@@ -12,9 +17,12 @@ class Physiotherapist(models.Model):
     city = models.CharField(max_length=20)
     state = models.CharField(max_length=20)
     pin = models.IntegerField()
+    gender = models.CharField(max_length=1, choices=gender_choices)
+    dob = models.DateField()
     mob_no = models.IntegerField()
     email = models.EmailField()
     rating = models.FloatField()
+    is_verified = models.BooleanField()
 
     def __str__(self):
         return f'{self.first_name}'
