@@ -12,7 +12,7 @@ class Test(models.Model):
         ('URINE', 'URINE'),
     )
     test_id=models.CharField(max_length=30,unique=True)
-    name=models.CharField(max_length =100, default='')
+    name=models.CharField(max_length =100, default='',)
     condition=models.CharField(max_length=100, default='', choices=CONDITION_CHOICES)
     test_type=models.CharField(max_length=100, default='', choices=TEST_TYPE_CHOICES)
     pre_test_information=models.CharField(max_length=256, default='')
