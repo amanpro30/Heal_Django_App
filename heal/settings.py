@@ -48,8 +48,12 @@ INSTALLED_APPS = [
     'accounts',
     'widget_tweaks',
     'crispy_forms',
-    'tests',
+    'patient',
+    'physiotherapist',
+    'nurse',
     'lab',
+    'tests',
+    'appointment'
 ]
 
 MIDDLEWARE = [
