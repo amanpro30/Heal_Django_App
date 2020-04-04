@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
     path('home/', home),
     path('', index),
+    path('lab/',include('lab.urls')),
+
 ]
