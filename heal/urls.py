@@ -24,5 +24,6 @@ urlpatterns = [
     path('home/', home),
     path('', index),
     path('lab/',include('lab.urls')),
+    url('',include('adminpage.urls')),
 
 ]

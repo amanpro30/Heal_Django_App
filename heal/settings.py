@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'nurse',
     'lab',
     'tests',
-    'appointment'
+    'appointment',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -210,3 +211,5 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+DEBUG=True
