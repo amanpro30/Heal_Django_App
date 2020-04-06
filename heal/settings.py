@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'nurse',
     'lab',
     'tests',
-    'appointment'
+    'appointment',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -169,7 +170,7 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400 # 1 day in seconds
 ACCOUNT_LOGOUT_REDIRECT_URL ='/accounts/login/'
-LOGIN_REDIRECT_URL = '/home/' # default to /accounts/profile 
+LOGIN_REDIRECT_URL = 'adminpage:adminpage' # default to /accounts/profile 
 SITE_ID = 1
 
 SOCIALACCOUNT_QUERY_EMAIL=ACCOUNT_EMAIL_REQUIRED
@@ -223,3 +224,4 @@ MEDIA_URL = '/media/'
 ACCOUNT_FORMS = {
     'signup': 'accounts.forms.MyCustomSignupForm'
 }
+DEBUG=True
