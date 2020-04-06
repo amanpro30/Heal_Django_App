@@ -8,8 +8,19 @@ from django.urls import reverse_lazy
 from django.core.mail import send_mail, BadHeaderError
 from django.urls import reverse,reverse_lazy
 from .forms import Add_Test
+from patient.models import Patient
+from physiotherapist.models import Physiotherapist
+from nurse.models import Nurse
 
 def adminpage(request):
+    print(request.user)
+    user_instance = User.objects.get(username=request.user.username)
+    if(Patient.objects.filter(user=user_instance)):
+        return redirect('/patient/home')
+    if(Physiotherapist.objects.filter(user=user_instance)):
+        return redirect('/physiotherapist/home')
+    if(Nurse.objects.filter(user=user_instance)):
+        return redirect('/nurse/home')
     return render(request, 'adminpage/adminpage.html')
 
 def add_new_test(request):

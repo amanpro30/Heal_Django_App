@@ -5,6 +5,7 @@ from nurse.models import Nurse
 from allauth.account.forms import SignupForm
 from django.forms import ModelForm
 from django.contrib.auth.models import User
+from django.shortcuts import redirect
 
 PROFESSION_CHOICES = (
     ('Patient', 'Patient'),
