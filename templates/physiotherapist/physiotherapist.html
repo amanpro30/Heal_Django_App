@@ -92,20 +92,20 @@ function relocate_slots()
 			</div>
 			<div class="col-md-9 col-sm-offset-1">
 				<div class="col-xs-8 text-left" style='padding: 15px 45px'>
-					<span style="font-size: 35px; ">XYZ Laboratory</span>&nbsp&nbsp&nbsp
+					<span style="font-size: 35px; ">Dr. {{profile.first_name}} {{profile.last_name}}</span>&nbsp&nbsp&nbsp
 
 				</div>
 				<div style="margin-top: 7px;color: blue;font-size: 20px; padding: 1px 45px" >
-					erhejrje
+					PHYSIOTHERAPIST
 				</div>
 
           <br><br>
 			    <div class="btn-group btn-group-md" style='padding: 2px 45px'>
 				    <!-- <button class="button button1">Send Message</button> -->
-            <a href="{% url 'lab:add_test' %}" class="button button3" role="button">Add Test</a>
-			<a href="#contact" class="button button3" role="button">View Tests</a>
-			<a href="#contact" class="button button3" role="button">Bookings</a>
-			<a href="#contact" class="button button3" role="button">Add Sample Collector</a>
+            <a href="{% url 'lab:add_test' %}" class="button button3" role="button">Make Slots</a>
+			<a href="#contact" class="button button3" role="button">View Slots</a>
+			<a href="#contact" class="button button3" role="button">View Bookings</a>
+			<a href="#contact" class="button button3" role="button">Complaint</a>
 
 			
 
@@ -128,17 +128,25 @@ function relocate_slots()
 			    </div> -->
 
 			    	<div style="padding: 5px 45px;font-size: 16px;opacity: 0.5;">
-			    		PATHOLOGIST BASIC INFORMATION
+			    		PHYSIOTHERAPIST BASIC INFORMATION
 			    	</div><br>
 			    	<div>
 			    		<table>
 			    			<tr>
 			    				<td>Date of Birth</td>
-			    				<td>dnkene</td>
+			    				<td>{{profile.dob}}</td>
 			    			</tr>
 			    			<tr>
 			    				<td>Gender</td>
-			    				<td>ejehwehw</td>
+			    				<td>{{profile.gender}}</td>
+			    			</tr>
+                            <tr>
+			    				<td>Experience</td>
+			    				<td>{{profile.experience}}</td>
+			    			</tr>
+                            <tr>
+			    				<td>Speciality</td>
+			    				<td>{{profile.speciality}}</td>
 			    			</tr>
 			    		</table>
 			    	</div><br>
@@ -149,19 +157,19 @@ function relocate_slots()
 			    	<table>
 			    		<tr>
 			    			<td>Phone</td>
-			    			<td>+91enwjnew</td>
+			    			<td>+91{{profile.mob_no}}</td>
 			    		</tr>
 			    		<tr>
 			    			<td>Locality</td>
-			    			<td>wjenwje</td>
+			    			<td>{{profile.house_no}} {{profile.city}} {{profile.state}}</td>
 			    		</tr>
               <tr>
-			    			<td>Hospital</td>
-			    			<td>wjenjwe</td>
+			    			{% comment %} <td>Hospital</td>
+			    			<td>wjenjwe</td> {% endcomment %}
 			    		</tr>
 			    		<tr>
 			    			<td>E-Mail</td>
-			    			<td>enwjnew</td>
+			    			<td>{{profile.user.email}}</td>
 			    		</tr>
 
 			    	</table>
