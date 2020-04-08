@@ -7,8 +7,11 @@ from django.conf.urls import url
 from django.conf import settings
 from django.contrib import admin
 from .views import *
+app_name="lab"
+
 urlpatterns = [
     path('lab_home/',lab_home, name='lab_home'),
+    path('add_test/',add_test, name='add_test'),
 
 ]
 

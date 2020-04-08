@@ -39,3 +39,10 @@ def lab_home(request):
 	# else:
 	# 	print('%%')
 	# 	return redirect(reverse('doctor_profile:verification'))
+
+def add_test(request):
+
+	context={
+
+	}	
+	return render(request,'lab/lab_add_test.html',context)
