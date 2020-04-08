@@ -7,9 +7,9 @@ from django.conf.urls import url
 from django.conf import settings
 from django.contrib import admin
 from .views import *
-urlpatterns = [
-    path('lab_home/',lab_home, name='lab_home'),
 
+urlpatterns = [
+    path('home/',home),
 ]
 
 if settings.DEBUG:

@@ -30,7 +30,6 @@ urlpatterns = [
     path('physiotherapist/', include('physiotherapist.urls')),
     path('patient/', include('patient.urls')),
     url('',include('adminpage.urls')),
-
 ]
 
 

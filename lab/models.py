@@ -1,5 +1,7 @@
 from django.db import models
 from tests.models import Test
+from django.contrib.auth.models import User
+
 # Create your models here.
 class Lab(models.Model):
     Male = 'Male'
@@ -10,13 +12,11 @@ class Lab(models.Model):
         (Female, 'Female'),
 
     )
-    
-    lab_id=models.CharField(max_length=30,unique=True) 
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     name=models.CharField(max_length =100, default='')
     registration=models.CharField(max_length =100, default='')
     owner_name=models.CharField(max_length =100, default='')
     gender=models.CharField(max_length=10, choices=GENDER_CHOICES)
-    email_id=models.CharField(max_length=250)
     mobile_no=models.BigIntegerField()
     rating=models.FloatField(default='10.0')
 
