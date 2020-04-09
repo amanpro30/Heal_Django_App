@@ -14,6 +14,14 @@ from django.db import IntegrityError
 from django.utils.decorators import method_decorator
 from .forms import Add_Profile, Modify_Profile
 
+def physio_home(request):
+    user = request.user
+    profile = Physiotherapist.objects.get(user=user)
+    context={
+           'profile':profile
+    }
+    
+    return render(request, 'physiotherapist/physiotherapist.html',context)
 
 # Create your views here.
 def home(request):
@@ -24,12 +32,12 @@ def home(request):
     completed_appointments = AppointmentPhysio.objects.filter(physiotherapist=physio_instance, status='C')
     if request.method == 'GET':
         slot_form = SlotForm()
-        slot_form.fields['time_start'].widget = DateTimePickerInput()
+        # slot_form.fields['time_start'].widget = DateTimePickerInput()
     elif request.method == 'POST':
         slot_form = SlotForm(request.POST)
         if slot_form.is_valid():
             slot_form.save()    
-    return render(request, 'physiotherapist/physiotherapist.html',{
+    return render(request, 'physiotherapist/physiotherapist1.html',{
         'upcoming': upcoming_appointments,
         'completed': completed_appointments,
         'slot_form': slot_form,
@@ -93,5 +101,14 @@ def Show_Profile(request):
             print('%%')
             return redirect(reverse('doctor_profile:verification'))
 
+def show_slot(request):
+    user = request.user
+    profile = Physiotherapist.objects.get(user=user)
+    context={
+        'first_name':profile.first_name,
+        'last_name':profile.last_name,
+    }
+    print(context)
 
+    return render(request,'physiotherapist/show_slot.html',context)
 
