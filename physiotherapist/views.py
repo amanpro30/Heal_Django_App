@@ -2,7 +2,6 @@ from django.shortcuts import render
 from .models import Physiotherapist, AppointmentPhysio, Slot
 from django.contrib.auth.models import User
 from .forms import SlotForm
-from bootstrap_datepicker_plus import DateTimePickerInput
 from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -15,6 +14,32 @@ from django.db import IntegrityError
 from django.utils.decorators import method_decorator
 from .forms import Add_Profile, Modify_Profile
 
+def physio_home(request):
+    user = request.user
+    username = request.user.username
+    user_instance = User.objects.get(username=username)
+    physio_instance = Physiotherapist.objects.get(user=user_instance)
+    upcoming_appointments = AppointmentPhysio.objects.filter(physiotherapist=physio_instance, status='U')
+    completed_appointments = AppointmentPhysio.objects.filter(physiotherapist=physio_instance, status='C')
+    profile = Physiotherapist.objects.get(user=user)
+    if request.method == 'GET':
+        slot_form = SlotForm()
+    elif request.method == 'POST':
+        slot_form = SlotForm(request.POST)
+        if slot_form.is_valid():
+            slot_instance = slot_form.save(commit=False) 
+            date = slot_form.cleaned_data.get('date')
+            time_start = slot_form.cleaned_data.get('time_start')
+            slot_instance = Slot(date = date, time_start = time_start, physiotherapist=physio_instance)
+            slot_instance.save()
+    context={
+           'profile':profile,
+            'upcoming': upcoming_appointments,
+            'completed': completed_appointments,
+            'slot_form': slot_form,
+    }
+    
+    return render(request, 'physiotherapist/physiotherapist.html',context)
 
 # Create your views here.
 def home(request):
@@ -25,7 +50,7 @@ def home(request):
     completed_appointments = AppointmentPhysio.objects.filter(physiotherapist=physio_instance, status='C')
     if request.method == 'GET':
         slot_form = SlotForm()
-        slot_form.fields['time_start'].widget = DateTimePickerInput()
+        # slot_form.fields['time_start'].widget = DateTimePickerInput()
     elif request.method == 'POST':
         slot_form = SlotForm(request.POST)
         if slot_form.is_valid():
@@ -36,6 +61,32 @@ def home(request):
         'slot_form': slot_form,
     })
 
+def Booking(request):
+    user = request.user
+    username = request.user.username
+    user_instance = User.objects.get(username=username)
+    physio_instance = Physiotherapist.objects.get(user=user_instance)
+    upcoming_appointments = AppointmentPhysio.objects.filter(physiotherapist=physio_instance, status='U')
+    completed_appointments = AppointmentPhysio.objects.filter(physiotherapist=physio_instance, status='C')
+    profile = Physiotherapist.objects.get(user=user)
+    if request.method == 'GET':
+        slot_form = SlotForm()
+    elif request.method == 'POST':
+        slot_form = SlotForm(request.POST)
+        if slot_form.is_valid():
+            slot_instance = slot_form.save(commit=False) 
+            date = slot_form.cleaned_data.get('date')
+            time_start = slot_form.cleaned_data.get('time_start')
+            slot_instance = Slot(date = date, time_start = time_start, physiotherapist=physio_instance)
+            slot_instance.save()
+    context={
+           'profile':profile,
+            'upcoming': upcoming_appointments,
+            'completed': completed_appointments,
+            'slot_form': slot_form,
+    }
+    
+    return render(request, 'physiotherapist/booking.html',context)
 
 
 

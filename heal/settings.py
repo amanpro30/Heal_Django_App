@@ -55,13 +55,9 @@ INSTALLED_APPS = [
     'tests',
     'appointment',
     'users.apps.UsersConfig',
-    'bootstrap_datepicker_plus',
-    'bootstrap4',
+    
 ]
 
-BOOTSTRAP4 = {
-    'include_jquery': True,
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -104,7 +100,7 @@ WSGI_APPLICATION = 'heal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'heal',
+        'NAME': 'heal2',
         'USER': 'postgres',
         'PASSWORD': 'password',
         'HOST': '127.0.0.1',
