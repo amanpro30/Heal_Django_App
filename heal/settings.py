@@ -55,7 +55,13 @@ INSTALLED_APPS = [
     'tests',
     'appointment',
     'users.apps.UsersConfig',
+    'bootstrap_datepicker_plus',
+    'bootstrap4',
 ]
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -100,7 +106,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'heal1',
         'USER': 'postgres',
-        'PASSWORD': 'kalpa@123',
+        'PASSWORD': 'password',
         'HOST': '127.0.0.1',
         'PORT': '5434',
     }
