@@ -36,11 +36,11 @@ class Add_Profile(forms.ModelForm):
         return self.cleaned_data['mobile_no']
 
 class Modify_Profile(forms.ModelForm):
-    email_id=forms.CharField(widget=forms.EmailInput)
+    # email_id=forms.CharField(widget=forms.EmailInput)
     # profile_photo= ImageField(blank=True, manual_crop="")
     class Meta:
         model=Physiotherapist
-        exclude=('user','gender','speciality','verified')
+        exclude=('user','gender','verified','rating')
 
 
     def clean_mobile_no(self):
