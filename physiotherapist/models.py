@@ -45,6 +45,7 @@ class Slot(models.Model):
                     ('18:00:00', '6 pm'),
                     )
     time_start = models.CharField(max_length=200,choices=TIME_CHOICES,null=True,blank=True)
+    status = models.BooleanField(default=False)
     def __str__(self):
         return f'{self.time_start}'
 

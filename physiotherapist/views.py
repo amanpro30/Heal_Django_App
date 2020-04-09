@@ -14,7 +14,7 @@ from django.db import IntegrityError
 from django.utils.decorators import method_decorator
 from .forms import Add_Profile, Modify_Profile
 from django.http import HttpResponseRedirect
-
+from patient.models import Patient
 
 def physio_home(request):
     user = request.user
@@ -150,22 +150,41 @@ def Show_Profile(request):
 def show_slot(request):
     user = request.user
     profile = Physiotherapist.objects.get(user=user)
+    username = request.user.username
+    user_instance = User.objects.get(username=username)
+    physio_instance = Physiotherapist.objects.get(user=user_instance)
+    slots = Slot.objects.filter(physiotherapist=physio_instance).order_by('-date')
     context={
         'first_name':profile.first_name,
         'last_name':profile.last_name,
+        'slots': slots,
     }
-    print(context)
-
-    return render(request,'physiotherapist/show_slot.html',context)
+    return render(request,'physiotherapist/show_slots.html',context)
 
 
 def show_appointments(request):
     user = request.user
+    username = request.user.username
+    user_instance = User.objects.get(username=username)
+    physio_instance = Physiotherapist.objects.get(user=user_instance)
+    upcoming_appointments = AppointmentPhysio.objects.filter(physiotherapist=physio_instance, status='U')
+    completed_appointments = AppointmentPhysio.objects.filter(physiotherapist=physio_instance, status='C')
     profile = Physiotherapist.objects.get(user=user)
+    upcoming_app = []
+    completed_app = []
+    for i in upcoming_appointments:
+        user_instance = Patient.objects.get(id=i.patient.id)
+        upcoming_app.append((i,user_instance))
+    for i in completed_appointments:
+        user_instance = Patient.objects.get(id=i.patient.id)
+        completed_app.append((i,user_instance))
+    
     context={
         'first_name':profile.first_name,
         'last_name':profile.last_name,
+        'upcoming': upcoming_app,
+        'completed': completed_app,
     }
-    print(context)
+    
 
-    return render(request,'physiotherapist/show_slot.html',context)
+    return render(request,'physiotherapist/show_appointments.html',context)
