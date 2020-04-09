@@ -55,8 +55,7 @@ INSTALLED_APPS = [
     'tests',
     'appointment',
     'users.apps.UsersConfig',
-    'bootstrap_datepicker_plus',
-    'bootstrap4',
+    
 ]
 
 BOOTSTRAP4 = {
