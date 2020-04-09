@@ -8,14 +8,16 @@
     <div class="card" style="width: 18rem;">
         <div class="card-body">
         <h5 class="card-title">Card title</h5>
-        <p class="card-text">{{i.appointment}}</p>
-        {% if not i.slots %}
+        <p class="card-text">{{i}}</p>
+        <p class="card-text">{{i.slot.time_start}}</p>
+        <p class="card-text">{{i.slot.time_end}}</p>
+        <!-- {% if not i.slots %}
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Add Slot
         </button>
         {% else %}
             {{i.slots.0.time_start}} to {{i.slots.0.time_end}}
-        {% endif %}
+        {% endif %} -->
         </div>
     </div>  
     {% endfor %}
@@ -26,11 +28,19 @@
         <div class="card-body">
         <h5 class="card-title">Card title</h5>
         <p class="card-text">{{i}}</p>
+        <p class="card-text">{{i.slot.time_start}}</p>
+        <p class="card-text">{{i.slot.time_end}}</p>
         <button type="button" class="btn btn-primary">Check Payment Status</button>
         </div>
-    </div>  
-    <!-- Button trigger modal -->
+    </div>
 
+    {% endfor %}
+    <br>
+    <br>  
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Add Slot
+    </button>
   
   <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -44,15 +54,19 @@
             </div>
             <div class="modal-body">
                 <form method="post">
+                    {% load bootstrap4 %}
+                    {% bootstrap_css %}
+                    {% bootstrap_javascript jquery='full' %}
+                    {{ form.media }}
+                    {% bootstrap_form slot_form %}
                     {% csrf_token %}
-                    {{ slot_form }}
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
             </div>
-
+            
         </div>
         </div>
     </div>
@@ -62,5 +76,5 @@
         $('#myInput').trigger('focus')
         })
     </script>
-    {% endfor %}
+    
 {% endblock %}

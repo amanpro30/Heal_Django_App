@@ -28,20 +28,20 @@ class Physiotherapist(models.Model):
     def __str__(self):
         return f'{self.first_name}'
 
+class Slot(models.Model):
+    time_start = models.DateTimeField()
+    time_end = models.DateTimeField()
+    def __str__(self):
+        return f'{self.time_start} to {self.time_end}'
+
 class AppointmentPhysio(models.Model):
     STATUS_CHOICES = (
         ('U', 'Upcoming'),
         ('C', 'Completed'),
     )
+    slot = models.OneToOneField(Slot, on_delete=models.CASCADE)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     physiotherapist = models.ForeignKey(Physiotherapist, on_delete=models.CASCADE)
     def __str__(self):
         return f'Patient:{self.patient}, Physio:{self.physiotherapist}'   
-
-class Slot(models.Model):
-    appointment = models.OneToOneField(AppointmentPhysio, on_delete=models.CASCADE)
-    time_start = models.DateTimeField()
-    time_end = models.DateTimeField()
-    def __str__(self):
-        return f'{self.appointment}'
