@@ -101,6 +101,15 @@ def Show_Profile(request):
             print('%%')
             return redirect(reverse('doctor_profile:verification'))
 
+def show_slot(request):
+    user = request.user
+    profile = Physiotherapist.objects.get(user=user)
+    context={
+        'first_name':profile.first_name,
+        'last_name':profile.last_name,
+    }
+    print(context)
 
+    return render(request,'physiotherapist/show_slot.html',context)
 
 
