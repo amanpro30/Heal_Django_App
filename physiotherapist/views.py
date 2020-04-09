@@ -2,7 +2,6 @@ from django.shortcuts import render
 from .models import Physiotherapist, AppointmentPhysio, Slot
 from django.contrib.auth.models import User
 from .forms import SlotForm
-from bootstrap_datepicker_plus import DateTimePickerInput
 from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView

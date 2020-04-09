@@ -16,31 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
-<<<<<<< HEAD
 from accounts.views import index
 from .views import home_page
 from django.conf import settings
 from django.conf.urls.static import static
-=======
-from accounts.views import index
-from django.conf import settings
-from django.conf.urls.static import static
-from accounts.views import index
-from .views import home_page
->>>>>>> 3b5f5fa2c79af2e71417e3840390e733337e0fba
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
-<<<<<<< HEAD
-=======
     path('', index),
     path('lab/',include('lab.urls')),
     path('nurse/', include('nurse.urls')),
     path('physiotherapist/', include('physiotherapist.urls')),
     path('patient/', include('patient.urls')),
     url('',include('adminpage.urls')),
->>>>>>> 3b5f5fa2c79af2e71417e3840390e733337e0fba
     path('', home_page),
     path('physiotherapist/',include('physiotherapist.urls')),
 ]

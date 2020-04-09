@@ -1,7 +1,6 @@
 from django.shortcuts import render
 
 # Create your views here.
-<<<<<<< HEAD
 def lab_home(request):
 	# user = request.user
 	# profile = Profile.objects.get(user=user)
@@ -26,7 +25,3 @@ def add_test(request):
 
 	}	
 	return render(request,'lab/lab_add_test.html',context)
-=======
-def home(request):
-    return render(request, 'lab/lab.html')
->>>>>>> 3b5f5fa2c79af2e71417e3840390e733337e0fba
