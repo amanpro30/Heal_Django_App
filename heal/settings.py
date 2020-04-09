@@ -73,6 +73,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.normpath(os.path.join(BASE_DIR, 'templates')),
+      
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -98,7 +99,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'heal',
         'USER': 'postgres',
-        'PASSWORD': 'password',
+        'PASSWORD': 'kalpa@123',
         'HOST': '127.0.0.1',
         'PORT': '5434',
     }
