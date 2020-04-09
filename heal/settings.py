@@ -55,7 +55,9 @@ INSTALLED_APPS = [
     'tests',
     'appointment',
     'users.apps.UsersConfig',
+    
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -74,6 +76,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.normpath(os.path.join(BASE_DIR, 'templates')),
+      
         ],
         'APP_DIRS': True,
         'OPTIONS': {
