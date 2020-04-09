@@ -25,8 +25,12 @@ from .views import home_page
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
+<<<<<<< HEAD
     # path('home/', home),
     # path('', index),
+=======
+    path('', index),
+>>>>>>> 3b5f5fa2c79af2e71417e3840390e733337e0fba
     path('lab/',include('lab.urls')),
     path('nurse/', include('nurse.urls')),
     path('patient/', include('patient.urls')),

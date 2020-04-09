@@ -1,27 +1,7 @@
 from django.shortcuts import render
-from django.shortcuts import render, get_object_or_404,redirect
-from django.contrib.auth import authenticate, login, get_user_model
-from django.contrib.auth.decorators import login_required
-from django.utils.encoding import force_bytes, force_text
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404,redirect
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate, get_user_model, logout
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from django.core.mail import send_mail
-from django.db import connection,IntegrityError
-from django.contrib.auth.models import User
-from django.urls import reverse_lazy, reverse
-from django.contrib import messages
-from django.urls import reverse_lazy
-from django import forms
 
 # Create your views here.
+<<<<<<< HEAD
 def lab_home(request):
 	# user = request.user
 	# profile = Profile.objects.get(user=user)
@@ -46,3 +26,7 @@ def add_test(request):
 
 	}	
 	return render(request,'lab/lab_add_test.html',context)
+=======
+def home(request):
+    return render(request, 'lab/lab.html')
+>>>>>>> 3b5f5fa2c79af2e71417e3840390e733337e0fba

@@ -11,6 +11,7 @@ from .forms import Add_Test
 from patient.models import Patient
 from physiotherapist.models import Physiotherapist
 from nurse.models import Nurse
+from lab.models import Lab
 
 def adminpage(request):
     print(request.user)
@@ -21,6 +22,8 @@ def adminpage(request):
         return redirect('/physiotherapist/home')
     if(Nurse.objects.filter(user=user_instance)):
         return redirect('/nurse/home')
+    if(Lab.objects.filter(user=user_instance)):
+        return redirect('/lab/home')
     return render(request, 'adminpage/adminpage.html')
 
 def add_new_test(request):

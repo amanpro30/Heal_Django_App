@@ -1,5 +1,17 @@
+from django.forms import ModelForm
 from django import forms
-from .models import Physiotherapist
+from .models import Slot, Physiotherapist
+from bootstrap_datepicker_plus import DatePickerInput
+
+class SlotForm(ModelForm):
+    class Meta:
+        model = Slot
+        fields = ['time_start', 'time_end']
+        widgets = {
+             'time_start': DatePickerInput(), # default date-format %m/%d/%Y will be used
+             'time_end': DatePickerInput(format='%Y-%m-%d'), # specify date-frmat
+         }
+
 # from pyuploadcare.dj.models import ImageField
 class Add_Profile(forms.ModelForm):
 
