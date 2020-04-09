@@ -30,7 +30,7 @@ def home(request):
         slot_form = SlotForm(request.POST)
         if slot_form.is_valid():
             slot_form.save()    
-    return render(request, 'physiotherapist/physiotherapist.html',{
+    return render(request, 'physiotherapist/physiotherapist1.html',{
         'upcoming': upcoming_appointments,
         'completed': completed_appointments,
         'slot_form': slot_form,
