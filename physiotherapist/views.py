@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-=======
 from django.shortcuts import render
 from .models import Physiotherapist, AppointmentPhysio, Slot
 from django.contrib.auth.models import User
 from .forms import SlotForm
-from bootstrap_datepicker_plus import DateTimePickerInput
->>>>>>> 3b5f5fa2c79af2e71417e3840390e733337e0fba
 from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -18,7 +14,7 @@ from django.db import IntegrityError
 from django.utils.decorators import method_decorator
 from .forms import Add_Profile, Modify_Profile
 
-def home(request):
+def physio_home(request):
     user = request.user
     profile = Physiotherapist.objects.get(user=user)
     context={
@@ -36,12 +32,12 @@ def home(request):
     completed_appointments = AppointmentPhysio.objects.filter(physiotherapist=physio_instance, status='C')
     if request.method == 'GET':
         slot_form = SlotForm()
-        slot_form.fields['time_start'].widget = DateTimePickerInput()
+        # slot_form.fields['time_start'].widget = DateTimePickerInput()
     elif request.method == 'POST':
         slot_form = SlotForm(request.POST)
         if slot_form.is_valid():
             slot_form.save()    
-    return render(request, 'physiotherapist/physiotherapist.html',{
+    return render(request, 'physiotherapist/physiotherapist1.html',{
         'upcoming': upcoming_appointments,
         'completed': completed_appointments,
         'slot_form': slot_form,
