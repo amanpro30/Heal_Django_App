@@ -15,6 +15,8 @@ class Test(models.Model):
     name=models.CharField(max_length =100, default='',)
     condition=models.CharField(max_length=100, default='', choices=CONDITION_CHOICES)
     test_type=models.CharField(max_length=100, default='', choices=TEST_TYPE_CHOICES)
+    price=models.FloatField()
+    discounted_price=models.FloatField()
     pre_test_information=models.CharField(max_length=256, default='')
     description=models.CharField(max_length=1000,default='')
 

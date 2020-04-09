@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'nurse',
     'lab',
     'tests',
-    'appointment'
+    'appointment',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -97,7 +98,7 @@ WSGI_APPLICATION = 'heal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'heal',
+        'NAME': 'heal1',
         'USER': 'postgres',
         'PASSWORD': 'kalpa@123',
         'HOST': '127.0.0.1',
@@ -146,12 +147,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    STATIC_DIR,
-]
-
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -170,7 +165,7 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400 # 1 day in seconds
 ACCOUNT_LOGOUT_REDIRECT_URL ='/accounts/login/'
-LOGIN_REDIRECT_URL = '/home/' # default to /accounts/profile 
+LOGIN_REDIRECT_URL = 'adminpage:adminpage' # default to /accounts/profile 
 SITE_ID = 1
 
 SOCIALACCOUNT_QUERY_EMAIL=ACCOUNT_EMAIL_REQUIRED
@@ -211,3 +206,17 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    STATIC_DIR,
+]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+ACCOUNT_FORMS = {
+    'signup': 'accounts.forms.MyCustomSignupForm'
+}
+DEBUG=True
