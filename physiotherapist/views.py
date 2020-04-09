@@ -17,9 +17,6 @@ from django.urls import reverse_lazy
 from django.db import IntegrityError
 from django.utils.decorators import method_decorator
 from .forms import Add_Profile, Modify_Profile
-from .models import *
-from django.shortcuts import render
-
 
 def home(request):
     user = request.user
