@@ -13,6 +13,8 @@ from django.urls import reverse_lazy
 from django.db import IntegrityError
 from django.utils.decorators import method_decorator
 from .forms import Add_Profile, Modify_Profile
+from django.http import HttpResponseRedirect
+
 
 def physio_home(request):
     user = request.user
@@ -80,11 +82,11 @@ def make_profile(request):
 
 def modify_profile(request):
     user = request.user
-    profile_item = Profile.objects.get(user=user)
+    profile_item = Physiotherapist.objects.get(user=user)
     form=Modify_Profile(request.POST or None, instance=profile_item)
     if form.is_valid():
             form.save()
-            return redirect('/doctor_home/')
+            return HttpResponseRedirect(reverse('physiotherapist:physio_home'))
     return render(request,'physiotherapist/new.html',{'form':form})
 
 

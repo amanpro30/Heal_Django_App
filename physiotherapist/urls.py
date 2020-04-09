@@ -13,6 +13,6 @@ urlpatterns = [
     path('make_profile/',views.make_profile,name='make_profile'),
     path('modify_profile/',views.modify_profile,name='modify_profile'),
     path('show_profile/',views.Show_Profile,name='show_profile'),
-    path('home/', physio_home),
+    path('home/', physio_home, name='physio_home'),
     path('show_slot/',show_slot, name='show_slot'),
     ]
