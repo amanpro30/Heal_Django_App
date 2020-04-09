@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block physiotherapist_show_slot %}
+{% block physiotherapist_show_appointment %}
 <!-- NAV BAR -->
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container">
@@ -32,7 +32,7 @@
         <div class="panel panel-default" style="padding-right:20px">
             <div class="panel-body">
               <br>
-          <h3>&nbspDr. {{first_name}}  {{last_name}}</h3>
+          <h3>&nbspHello Dr. {{first_name}}  {{last_name}}</h3>
 
           {% if error_message %}
               <p><strong>{{ error_message }}</strong></p>
@@ -41,11 +41,9 @@
           <table class="table table-striped table-hover ">
               <thead>
               <tr>
-                  <th>Patient Name</th>
-                  <th>Patient Address</th>
                   <th>Date</th>
                   <th>Time</th>
-                  <th>Attended</th>
+                  <th>Slot Status</th>
                   <!-- <th>RMP Name </th> -->
                   
 
