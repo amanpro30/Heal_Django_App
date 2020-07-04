@@ -50,6 +50,9 @@
                       {% if error_message %}
                           <p><strong>{{ error_message }}</strong></p>
                       {% endif %}
+                      <div class="alert alert-warning">
+                        Only Available Slots can be deleted to cancel booked slots contact admin
+                    </div>
 
                       <table class="table table-striped table-hover ">
                           <thead>
@@ -67,8 +70,12 @@
                                   <td> {{slot.date.date}}</td>
                                   <td> {{slot.start_time}}</td>
                                   <td> {% if slot.slot_status %} Booked {% else %} Available {% endif %}       </td>
-
-                              </tr>
+                                  {% if slot.slot_status %}
+                                  <td> </td>
+                                  {% else %}    
+                                       <td><a style="pointer-events: auto; display: inline-block;"  href='{% url "physiotherapist:delete_slot" slot_id=slot.pk %}'> Delete Slot </a></td>
+                                  {% endif %}
+                                </tr>
                           {% endfor %}
                           </tbody>
                       </table>

@@ -201,7 +201,7 @@ def show_slots(request):
     profile = Physiotherapist.objects.get(user=user)
     first_name=profile.first_name
     last_name=profile.last_name
-    dates=Slot.objects.filter(physiotherapist=profile)
+    dates=Slot.objects.filter(physiotherapist=profile).order_by('start_time')
     print(dates)
     return render(request,'physiotherapist/show_slots.html',{'slots':dates,'first_name':first_name,'last_name':last_name})
 
@@ -252,3 +252,8 @@ def show_complaint_feedback(request):
     feedback=Physiotherapist_complaint_feedback.objects.filter(physiotherapist=profile)
     print(feedback)
     return render(request,'physiotherapist/show_feedback.html',{'feedbacks':feedback,'first_name':first_name,'last_name':last_name})
+
+def delete_slot(request, slot_id):
+    # print(request.get['slot_id'])
+    Slot.objects.filter(pk=slot_id).delete()
+    return redirect('/physiotherapist/slots/')
