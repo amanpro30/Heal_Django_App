@@ -15,6 +15,7 @@ from django.utils.decorators import method_decorator
 from .forms import Add_Profile, Modify_Profile
 from .models import BookingDate,Slot, Physiotherapist_complaint_feedback
 from django.http import HttpResponseRedirect
+from django.utils import timezone
 
 
 def physio_home(request):
@@ -72,7 +73,8 @@ def make_profile(request):
             profile_item.email_id=user.email
             profile_item.save()
 
-            return render(request, "physiotherapist/verification.html", {})
+            # return render(request, "physiotherapist/verification.html", {})
+            return redirect('/physiotherapist/home/')
 
 
     else:
@@ -80,7 +82,7 @@ def make_profile(request):
         form=Add_Profile(initial={'user':user,'email_id':user.email})
         #form.fields['user'].widget.attrs['disabled'] = True
         #form.fields['user'].editable=False
-    return render(request,'new.html',{'form':form})
+    return render(request,'physiotherapist/new.html',{'form':form})
 
 
 def modify_profile(request):
@@ -144,8 +146,13 @@ class DateCreate(CreateView):
     def get_initial(self):
 
          max_date=BookingDate.objects.all().aggregate(Max('date'))
+         print(max_date)
+         print(datetime)
+         if max_date['date__max'] == None:
+              max_date['date__max'] = timezone.now() + datetime.timedelta(days=1)
+         print(max_date)     
          key, value = max_date.popitem()
-         value += datetime.timedelta(days=1)
+        #  value += datetime.timedelta(days=1)
          print(value)
         # value=int(list(max_id.values())[0])
         # value=value+1
