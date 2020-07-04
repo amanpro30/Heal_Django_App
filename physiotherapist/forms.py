@@ -2,10 +2,10 @@ from django.forms import ModelForm
 from django import forms
 from .models import Slot, Physiotherapist
 
-class SlotForm(ModelForm):
-    class Meta:
-        model = Slot
-        fields = ['time_start', 'time_end']
+# class SlotForm(ModelForm):
+#     class Meta:
+#         model = Slot
+#         fields = ['time_start', 'time_end']
         # widgets = {
         #      'time_start': DatePickerInput(), # default date-format %m/%d/%Y will be used
         #      'time_end': DatePickerInput(format='%Y-%m-%d'), # specify date-frmat
@@ -49,6 +49,16 @@ class Modify_Profile(forms.ModelForm):
             raise forms.ValidationError('enter  a 10 digit number')
         return self.cleaned_data['mobile_no']
 
-
+class SlotForm(forms.ModelForm):
+    # date=forms.DateField(
+    #     widget=forms.DateInput(
+    #     attrs={
+    #     'type':'date',
+    #     }
+    #     )
+    # )
+    class Meta:
+        model = Slot
+        fields=['start_time',]
 
 

@@ -13,10 +13,13 @@ from django.urls import reverse_lazy
 from django.db import IntegrityError
 from django.utils.decorators import method_decorator
 from .forms import Add_Profile, Modify_Profile
+from .models import BookingDate,Slot, Physiotherapist_complaint_feedback
 
 def physio_home(request):
     user = request.user
     profile = Physiotherapist.objects.get(user=user)
+    fb= Physiotherapist_complaint_feedback.objects.all()
+    print(fb)
     context={
            'profile':profile
     }
@@ -80,17 +83,17 @@ def make_profile(request):
 
 def modify_profile(request):
     user = request.user
-    profile_item = Profile.objects.get(user=user)
+    profile_item = Physiotherapist.objects.get(user=user)
     form=Modify_Profile(request.POST or None, instance=profile_item)
     if form.is_valid():
             form.save()
-            return redirect('/doctor_home/')
+            return redirect('/physiotherapist/home/')
     return render(request,'physiotherapist/new.html',{'form':form})
 
 
 def Show_Profile(request):
         user = request.user
-        profile = Profile.objects.get(user=user)
+        profile = Physiotherapist.objects.get(user=user)
         context={
             'profile':profile
         }
@@ -99,8 +102,144 @@ def Show_Profile(request):
             return render(request,'physiotherapist/show_profile.html',context)
         else:
             print('%%')
-            return redirect(reverse('doctor_profile:verification'))
+            return redirect(reverse('physiotherapist:verification'))
+
+def create_slot(request, pk):
+    user=request.user
+    form = SlotForm(request.POST or None)
+    date = get_object_or_404(BookingDate, pk=pk)
+    if form.is_valid():
+
+        item = form.save(commit=False)
+        item.date = date
+        profile = Physiotherapist.objects.get(user=user)
+        item.physiotherapist =profile
+        try:
+            item.save()
+        except IntegrityError as e:
+            context = {
+                'date': date,
+                'form': form,
+                'message':"*Slot already Exists"
+            }
+            return render(request, 'physiotherapist/create_slot.html', context)
+
+        return redirect('/physiotherapist/home/')
+    context = {
+        'date': date,
+        'form': form,
+    }
+
+    return render(request, 'physiotherapist/create_slot.html', context)
+
+# @method_decorator(login_url=reverse_lazy('login'))
+class DateCreate(CreateView):
+
+    model=BookingDate
+    fields=['date',]
 
 
+    def get_initial(self):
+
+         max_date=BookingDate.objects.all().aggregate(Max('date'))
+         key, value = max_date.popitem()
+         value += datetime.timedelta(days=1)
+         print(value)
+        # value=int(list(max_id.values())[0])
+        # value=value+1
+        # #user = request.user
+        #
+        #
+        # #print(value)
+         initial = super(DateCreate, self).get_initial()
+         initial.update({'date': value})
+         return initial
+    def form_valid(self, form):
+        user=self.request.user
+
+        profile = Physiotherapist.objects.get(user=user)
+        date = form.save(commit=False)
+        print(date)
+        try:
+            obj = BookingDate.objects.filter(date=str(date)).filter(physiotherapist=profile).first()
+        except BookingDate.DoesNotExist:
+            obj = None
+        # obj=get_object_or_404(BookingDate, date=str(date))
+        print('SHIVAM')
+        print(obj)
+        #print(obj.pk)
+        if(obj==None):
+            print("no")
+            date.physiotherapist = profile
+            return super(DateCreate, self).form_valid(form)
+        else:
+            print('Yes')
+            #return create_slot(self.request,pk=obj.pk-1)
+            return redirect(str(obj.pk) + '/slot/')
+            #return reverse('doctor_profile:create_slot',kwargs={'pk':int(obj.pk)})
+            #return HttpResponse('OK')
+            #return super(DateCreate, self).form_invalid(form)
+        # context={
+        #
+		#     "object":appointment,
+		# }
+		# return render(self.request,'booking/booking_confirmation.html', context=context)
 
 
+# @login_required(login_url=reverse_lazy('login'))
+def show_slots(request):
+    user=request.user
+    profile = Physiotherapist.objects.get(user=user)
+    first_name=profile.first_name
+    last_name=profile.last_name
+    dates=Slot.objects.filter(physiotherapist=profile)
+    print(dates)
+    return render(request,'physiotherapist/show_slots.html',{'slots':dates,'first_name':first_name,'last_name':last_name})
+
+class ComplaintFeedbackCreate(CreateView):
+
+    model= Physiotherapist_complaint_feedback
+    fields=['specify_type','description']
+
+
+    def form_valid(self, form):
+        user=self.request.user
+
+        profile = Physiotherapist.objects.get(user=user)
+        feedback = form.save(commit=False)
+        feedback.physiotherapist = profile
+        feedback.save()
+        return redirect('/physiotherapist/home/')
+        # print(date)
+        # try:
+        #     obj = BookingDate.objects.filter(date=str(date)).filter(physiotherapist=profile).first()
+        # except BookingDate.DoesNotExist:
+        #     obj = None
+        # # obj=get_object_or_404(BookingDate, date=str(date))
+        # print('SHIVAM')
+        # print(obj)
+        # #print(obj.pk)
+        # if(obj==None):
+        #     print("no")
+        #     date.physiotherapist = profile
+        #     return super(DateCreate, self).form_valid(form)
+        # else:
+        #     print('Yes')
+        #     #return create_slot(self.request,pk=obj.pk-1)
+        #     return redirect(str(obj.pk) + '/slots/')
+            #return reverse('doctor_profile:create_slot',kwargs={'pk':int(obj.pk)})
+            #return HttpResponse('OK')
+            #return super(DateCreate, self).form_invalid(form)
+        # context={
+        #
+		#     "object":appointment,
+		# }
+		# return render(self.request,'booking/booking_confirmation.html', context=context)
+def show_complaint_feedback(request):
+    user=request.user
+    profile = Physiotherapist.objects.get(user=user)
+    first_name=profile.first_name
+    last_name=profile.last_name
+    feedback=Physiotherapist_complaint_feedback.objects.filter(physiotherapist=profile)
+    print(feedback)
+    return render(request,'physiotherapist/show_feedback.html',{'feedbacks':feedback,'first_name':first_name,'last_name':last_name})

@@ -40,64 +40,33 @@ button:hover, a:hover {
 
 
 {% load static %}
- <!-- NAV BAR  -->
-      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <div class="container">
-        <a href='{% url "doctor_home" %}' class="navbar-brand"><b>SMART HEALTHCATRE SYSTEM</b></a>
-        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a href='{% url "doctor_home" %}' class="nav-link">Home</a>
-            </li>
-
-
-            <li class="nav-item">
-              <a href='{% url "work_history:index" %}' class="nav-link">Work History</a>
-            </li>
-            <li class="nav-item active">
-              <a href='{% url "logout" %}' class="nav-link">Logout</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
+ 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   {% block prescription_home %}
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+ <!-- NAV BAR -->
+ <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container">
-    <a href="index.html" class="navbar-brand"><b>SMART HEALTHCATRE SYSTEM</b></a>
+    <a href='' class="navbar-brand"><b>HEAL AT HOME</b></a>
     <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a href='{% url "doctor_home" %}' class="nav-link">Home</a>
+        {% comment %} <li class="nav-item">
+          <a href='' class="nav-link">Home</a>
         </li>
 
-        <li class="nav-item">
-          <a href='{% url "how_we_work" %}' class="nav-link">How we work</a>
-        </li>
-        <li class="nav-item">
-          <a href='{% url "contact" %}' class="nav-link">Contact</a>
-        </li>
-      
-        <li class="nav-item">
-          <a href='{% url "work_history:index" %}' class="nav-link">Work History</a>
-        </li>
+
+       
         <li class="nav-item active">
-          <a href='{% url "logout" %}' class="nav-link">Logout</a>
-        </li>
+          <a href='' class="nav-link">Logout</a>
+        </li> {% endcomment %}
       </ul>
     </div>
   </div>
-  </nav>
+</nav>
 
   <div class="container-fluid" style="background-image:url({% static 'img/dates.jpg' %});background-repeat; background-size:cover;height:530px">
 
