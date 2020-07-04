@@ -14,6 +14,8 @@ from django.db import IntegrityError
 from django.utils.decorators import method_decorator
 from .forms import Add_Profile, Modify_Profile
 from .models import BookingDate,Slot, Physiotherapist_complaint_feedback
+from django.http import HttpResponseRedirect
+
 
 def physio_home(request):
     user = request.user
