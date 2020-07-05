@@ -93,7 +93,7 @@ class Physiotherapist_complaint_feedback(models.Model):
     )
 
     physiotherapist=models.ForeignKey(Physiotherapist,on_delete=models.CASCADE, null=True,blank=True)
-    specify_type=models.CharField(max_length=200,choices=COMPLAINT_CHOICES,null=True,blank=True)
+    specify_type=models.CharField(max_length=200,choices=COMPLAINT_CHOICES,null=False,blank=False)
     date=models.DateField(auto_now_add=True)
     status=models.CharField(max_length=200,choices=STATUS_CHOICES,default='SENT TO ADMIN')
-    description=models.TextField()
+    description=models.TextField(null=False, blank=False)

@@ -5,26 +5,36 @@
 {% block physiotherapist_show_slot %}
 <!-- NAV BAR -->
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <div class="container">
-      <a href='' class="navbar-brand"><b>HEAL AT HOME</b></a>
-      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav ml-auto">
-          {% comment %} <li class="nav-item">
-            <a href='' class="nav-link">Home</a>
-          </li>
+  <div class="container">
+    <a href='/' class="navbar-brand"><b>HEAL AT HOME</b></a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a href='{% url "physiotherapist:home" %}'  class="nav-link">Home</a>
+  </li>
+  <li class="nav-item">
+    <a href='{% url "physiotherapist:modify_profile" %}'  class="nav-link">Edit Profile</a>
+    </li>
+  <li class="nav-item">
+    <a href=''  class="nav-link">Bookings</a>
+    </li>
+  
+    <li class="nav-item">
+    <a href='/physiotherapist/show_complaint_feedback/'  class="nav-link">Show complaints/feedback</a>
+    </li>
+  
 
-
-         
-          <li class="nav-item active">
-            <a href='' class="nav-link">Logout</a>
-          </li> {% endcomment %}
-        </ul>
-      </div>
+       
+        <li class="nav-item active">
+          <a href='' class="nav-link">Logout</a>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 <div class="container-fluid">
 
     <div class="col-sm-8 col-md-12" style="padding-right:20px">
@@ -32,7 +42,14 @@
         <div class="panel panel-default" style="padding-right:20px">
             <div class="panel-body">
               <br>
-          <h3>&nbspDr. {{first_name}}  {{last_name}}</h3>
+              <h3>Dr. {{first_name}}  {{last_name}}  
+                <span style="color: blue;font-size: 20px; padding: 1px 45px" >
+                  PHYSIOTHERAPIST
+                </span>
+                </h3> 
+                <br><div class="alert alert-warning">
+                  These are the complaints and feedback made by you along with their status
+              </div>
 
           {% if error_message %}
               <p><strong>{{ error_message }}</strong></p>
