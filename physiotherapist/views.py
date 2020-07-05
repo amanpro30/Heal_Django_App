@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Physiotherapist, AppointmentPhysio, Slot
+from .models import Physiotherapist, Slot
 from django.contrib.auth.models import User
 from .forms import SlotForm
 from django.shortcuts import get_object_or_404, redirect
@@ -22,7 +22,7 @@ def physio_home(request):
     user = request.user
     profile = Physiotherapist.objects.get(user=user)
     fb= Physiotherapist_complaint_feedback.objects.all()
-    print(fb)
+    # print(fb)
     context={
            'profile':profile
     }
@@ -30,24 +30,24 @@ def physio_home(request):
     return render(request, 'physiotherapist/physiotherapist.html',context)
 
 # Create your views here.
-def home(request):
-    username = request.user.username
-    user_instance = User.objects.get(username=username)
-    physio_instance = Physiotherapist.objects.get(user=user_instance)
-    upcoming_appointments = AppointmentPhysio.objects.filter(physiotherapist=physio_instance, status='U')
-    completed_appointments = AppointmentPhysio.objects.filter(physiotherapist=physio_instance, status='C')
-    if request.method == 'GET':
-        slot_form = SlotForm()
-        # slot_form.fields['time_start'].widget = DateTimePickerInput()
-    elif request.method == 'POST':
-        slot_form = SlotForm(request.POST)
-        if slot_form.is_valid():
-            slot_form.save()    
-    return render(request, 'physiotherapist/physiotherapist1.html',{
-        'upcoming': upcoming_appointments,
-        'completed': completed_appointments,
-        'slot_form': slot_form,
-    })
+# def home(request):
+#     username = request.user.username
+#     user_instance = User.objects.get(username=username)
+#     physio_instance = Physiotherapist.objects.get(user=user_instance)
+#     upcoming_appointments = AppointmentPhysio.objects.filter(physiotherapist=physio_instance, status='U')
+#     completed_appointments = AppointmentPhysio.objects.filter(physiotherapist=physio_instance, status='C')
+#     if request.method == 'GET':
+#         slot_form = SlotForm()
+#         # slot_form.fields['time_start'].widget = DateTimePickerInput()
+#     elif request.method == 'POST':
+#         slot_form = SlotForm(request.POST)
+#         if slot_form.is_valid():
+#             slot_form.save()    
+#     return render(request, 'physiotherapist/physiotherapist1.html',{
+#         'upcoming': upcoming_appointments,
+#         'completed': completed_appointments,
+#         'slot_form': slot_form,
+#     })
 
 
 
@@ -102,10 +102,10 @@ def Show_Profile(request):
             'profile':profile
         }
         if(profile.verified==True):
-            print('&&')
+            # print('&&')
             return render(request,'physiotherapist/show_profile.html',context)
         else:
-            print('%%')
+            # print('%%')
             return redirect(reverse('physiotherapist:verification'))
 
 def create_slot(request, pk):
@@ -146,14 +146,14 @@ class DateCreate(CreateView):
     def get_initial(self):
 
          max_date=BookingDate.objects.all().aggregate(Max('date'))
-         print(max_date)
-         print(datetime)
+        #  print(max_date)
+        #  print(datetime)
          if max_date['date__max'] == None:
               max_date['date__max'] = timezone.now() + datetime.timedelta(days=1)
-         print(max_date)     
+        #  print(max_date)     
          key, value = max_date.popitem()
         #  value += datetime.timedelta(days=1)
-         print(value)
+        #  print(value)
         # value=int(list(max_id.values())[0])
         # value=value+1
         # #user = request.user
@@ -168,21 +168,21 @@ class DateCreate(CreateView):
 
         profile = Physiotherapist.objects.get(user=user)
         date = form.save(commit=False)
-        print(date)
+        # print(date)
         try:
             obj = BookingDate.objects.filter(date=str(date)).filter(physiotherapist=profile).first()
         except BookingDate.DoesNotExist:
             obj = None
         # obj=get_object_or_404(BookingDate, date=str(date))
-        print('SHIVAM')
-        print(obj)
+        # print('SHIVAM')
+        # print(obj)
         #print(obj.pk)
         if(obj==None):
-            print("no")
+            # print("no")
             date.physiotherapist = profile
             return super(DateCreate, self).form_valid(form)
         else:
-            print('Yes')
+            # print('Yes')
             #return create_slot(self.request,pk=obj.pk-1)
             return redirect(str(obj.pk) + '/slot/')
             #return reverse('doctor_profile:create_slot',kwargs={'pk':int(obj.pk)})
@@ -250,7 +250,7 @@ def show_complaint_feedback(request):
     first_name=profile.first_name
     last_name=profile.last_name
     feedback=Physiotherapist_complaint_feedback.objects.filter(physiotherapist=profile)
-    print(feedback)
+    # print(feedback)
     return render(request,'physiotherapist/show_feedback.html',{'feedbacks':feedback,'first_name':first_name,'last_name':last_name})
 
 def delete_slot(request, slot_id):
