@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from .models import Slot, Physiotherapist
+from .models import LabSlot1, Lab1
 
 # class SlotForm(ModelForm):
 #     class Meta:
@@ -26,7 +26,7 @@ class Add_Profile(forms.ModelForm):
 #     widget=forms.TextInput(attrs={'readonly':'readonly'})
 # )
     class Meta:
-        model=Physiotherapist
+        model=Lab1
         exclude = ('user','verified','email_id',)
 
     def clean_mobile_no(self):
@@ -39,7 +39,7 @@ class Modify_Profile(forms.ModelForm):
     # email_id=forms.CharField(widget=forms.EmailInput)
     # profile_photo= ImageField(blank=True, manual_crop="")
     class Meta:
-        model=Physiotherapist
+        model=Lab1
         exclude=('user','gender','verified','rating')
 
 
@@ -58,7 +58,7 @@ class SlotForm(forms.ModelForm):
     #     )
     # )
     class Meta:
-        model = Slot
-        fields=['start_time',]
+        model = LabSlot1
+        fields=['time_start',]
 
 

@@ -12,10 +12,12 @@ class Lab(models.Model):
         (Female, 'Female'),
 
     )
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name=models.CharField(max_length =100, default='')
-    registration=models.CharField(max_length =100, default='')
+    user = models.CharField(primary_key= True, max_length=100)
+    lab_name=models.CharField(max_length =100, default='')
+    lab_registration=models.CharField(max_length =100, default='')
+    lab_owner = models.CharField(max_length=350)
     owner_name=models.CharField(max_length =100, default='')
+    lab_address= models.CharField(max_length =300, default='')
     gender=models.CharField(max_length=10, choices=GENDER_CHOICES)
     mobile_no=models.BigIntegerField()
     rating=models.FloatField(default='10.0')
@@ -23,6 +25,4 @@ class Lab(models.Model):
     def __str__(self):
         return self.name
 
-class Lab_Tests(models.Model):
-    lab_id=models.ForeignKey(Lab,on_delete=models.CASCADE, null=True,blank=True)        
-    test_id=models.ForeignKey(Test,on_delete=models.CASCADE, null=True,blank=True) 
+

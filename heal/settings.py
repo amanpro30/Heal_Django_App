@@ -55,8 +55,10 @@ INSTALLED_APPS = [
     'tests',
     'appointment',
     'users.apps.UsersConfig',
+    'lab1',
     
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 MIDDLEWARE = [

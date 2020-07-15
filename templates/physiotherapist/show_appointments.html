@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block physiotherapist_show_slot %}
+{% block physiotherapist_show_appointment %}
 <!-- NAV BAR -->
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container">
@@ -48,7 +48,7 @@
                 </span>
                 </h3> 
                 <br><div class="alert alert-warning">
-                  These are the complaints and feedback made by you along with their status
+                  These are the Appointments appointed to you along with details of the patient
               </div>
 
           {% if error_message %}
@@ -58,11 +58,9 @@
           <table class="table table-striped table-hover ">
               <thead>
               <tr>
-                  <th>Patient Name</th>
-                  <th>Patient Address</th>
                   <th>Date</th>
                   <th>Time</th>
-                  <th>Attended</th>
+                  <th>Slot Status</th>
                   <!-- <th>RMP Name </th> -->
                   
 

@@ -1,6 +1,13 @@
 from django.db import models
+from django.urls import reverse
+from django.contrib.auth.models import User
+from datetime import date
+from datetime import datetime
+from django.db.models.signals import pre_save
 
-# Create your models here.
+
+
+
 class Test(models.Model):
     CONDITION_CHOICES=(
         ('ALLERGY', 'ALLERGY'),
@@ -11,7 +18,7 @@ class Test(models.Model):
         ('BLOOD', 'BLOOD'),
         ('URINE', 'URINE'),
     )
-    test_id=models.CharField(max_length=30,unique=True)
+    
     name=models.CharField(max_length =100, default='',)
     condition=models.CharField(max_length=100, default='', choices=CONDITION_CHOICES)
     test_type=models.CharField(max_length=100, default='', choices=TEST_TYPE_CHOICES)
@@ -22,3 +29,5 @@ class Test(models.Model):
 
     def __str__(self):
         return self.name
+
+

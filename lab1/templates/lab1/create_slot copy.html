@@ -3,37 +3,34 @@
 
 {% load static %}
 {% block slot %}
- <!-- NAV BAR -->
- <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <div class="container">
-    <a href='/' class="navbar-brand"><b>HEAL AT HOME</b></a>
-    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a href='{% url "physiotherapist:home" %}'  class="nav-link">Home</a>
-  </li>
-  <li class="nav-item">
-    <a href='{% url "physiotherapist:modify_profile" %}'  class="nav-link">Edit Profile</a>
-    </li>
-  <li class="nav-item">
-    <a href=''  class="nav-link">Bookings</a>
-    </li>
-  
-    <li class="nav-item">
-    <a href='/physiotherapist/show_complaint_feedback/'  class="nav-link">Show complaints/feedback</a>
-    </li>
-  
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<div class="container">
+  <a href='{% url "doctor_home" %}' class="navbar-brand"><b>SMART HEALTHCATRE SYSTEM</b></a>
+  <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a href='{% url "doctor_home" %}' class="nav-link">Home</a>
+      </li>
 
-       
-        <li class="nav-item active">
-          <a href='' class="nav-link">Logout</a>
-        </li>
-      </ul>
-    </div>
+      <li class="nav-item">
+        <a href='{% url "how_we_work" %}' class="nav-link">How we work</a>
+      </li>
+      <li class="nav-item">
+        <a href='{% url "contact" %}' class="nav-link">Contact</a>
+      </li>
+      
+      <li class="nav-item">
+        <a href='{% url "work_history:index" %}' class="nav-link">Work History</a>
+      </li>
+      <li class="nav-item active">
+        <a href='{% url "logout" %}' class="nav-link">Logout</a>
+      </li>
+    </ul>
   </div>
+</div>
 </nav>
 <br><br><br>
 <div class='container'>
@@ -51,7 +48,7 @@
             <label style="color:red;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp {{message}} </label>
             <!-- </div> -->
         {% csrf_token %}
-        {% include 'physiotherapist/create_item_template.html' %}
+        {% include 'doctor_profile/create_item_template.html' %}
 
 
           <div class="col-sm-offset-2 col-sm-5 text-right">

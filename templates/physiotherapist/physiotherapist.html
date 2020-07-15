@@ -7,40 +7,58 @@
 {% load static %}
 
 {% block physiotherapist_homepage %}
-<script>
-{% comment %} function relocate_edit()
-{
-     location.href = "/profile/modify_profile";
-}
 
-function relocate_appointment()
-{
-     location.href = "/appointments/";
-}
+<script>
 function relocate_slots()
 {
-     location.href = "/profile/date_add/";
+     location.href = "/physiotherapist/date_add/";
 }
-</script> {% endcomment %}
-</script>
+function relocate_show_slots()
+{
+     location.href = "/physiotherapist/slots/";
+}
+function relocate_complaint()
+{
+     location.href = "/physiotherapist/complaint_feedback/";
+}
+function relocate_feedback()
+{
+     location.href = "/physiotherapist/show_complaint_feedback/";
+}
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+</script> 
+
 <!-- NAV BAR -->
       <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
       <div class="container">
-        <a href='' class="navbar-brand"><b>HEAL AT HOME</b></a>
+        <a href='/' class="navbar-brand"><b>HEAL AT HOME</b></a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav ml-auto">
-            {% comment %} <li class="nav-item">
-              <a href='' class="nav-link">Home</a>
-            </li>
-
+            <li class="nav-item">
+              <a href='{% url "physiotherapist:home" %}'  class="nav-link">Home</a>
+			</li>
+			<li class="nav-item">
+				<a href='{% url "physiotherapist:modify_profile" %}'  class="nav-link">Edit Profile</a>
+			  </li>
+			<li class="nav-item">
+				<a href=''  class="nav-link">Bookings</a>
+			  </li>
+			
+			  <li class="nav-item">
+				<a href='/physiotherapist/show_complaint_feedback/'  class="nav-link">Show complaints/feedback</a>
+			  </li>
+			
 
            
             <li class="nav-item active">
               <a href='' class="nav-link">Logout</a>
-            </li> {% endcomment %}
+            </li>
           </ul>
         </div>
       </div>
@@ -83,10 +101,10 @@ function relocate_slots()
 
 <div class="container" style="margin-top: 5%">
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<br>
 				<div>
-					{% comment %} <img src="/media/{{profile.profile_photo}}" class="img-rounded" alt="DOCTOR" width="270" height="236"> {% endcomment %}
+					 <img src="/media/{{profile.profile_photo}}" class="img-rounded" alt="DOCTOR" width="210" height="236"> 
 				</div>
 
 				<br>
@@ -106,10 +124,11 @@ function relocate_slots()
           <br><br>
 			    <div class="btn-group btn-group-md" style='padding: 2px 45px'>
 				    <!-- <button class="button button1">Send Message</button> -->
-            <a href="{% url 'lab:add_test' %}" class="button button3" role="button">Make Slots</a>
-			<a href="#contact" class="button button3" role="button">View Slots</a>
-			<a href="#contact" class="button button3" role="button">View Bookings</a>
-			<a href="#contact" class="button button3" role="button">Complaint</a>
+			<butoon class="button button3" onclick=" relocate_slots()">Make Slot</butoon>
+			<butoon class="button button3" onclick=" relocate_show_slots()">Show Slots</butoon>
+			<a href="#contact" class="button button3" role="button">Bookings</a>
+			<butoon class="button button3" onclick=" relocate_complaint()">Complaint/Feedback</butoon>
+			<!-- <butoon class="button button3" onclick=" relocate_feedback()" >Show Complaint</butoon> -->
 
 			
 
