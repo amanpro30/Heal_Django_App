@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'appointment',
     'users.apps.UsersConfig',
     'lab1',
+    'samplecollector',
     
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

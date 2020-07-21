@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from datetime import date
 from datetime import datetime
 from django.db.models.signals import pre_save
+from lab1.models import Lab1
+
 
 
 
@@ -22,8 +24,8 @@ class Test(models.Model):
     name=models.CharField(max_length =100, default='',)
     condition=models.CharField(max_length=100, default='', choices=CONDITION_CHOICES)
     test_type=models.CharField(max_length=100, default='', choices=TEST_TYPE_CHOICES)
-    price=models.FloatField()
-    discounted_price=models.FloatField()
+    price=models.FloatField(default=0)
+    discounted_price=models.FloatField(default=0)
     pre_test_information=models.CharField(max_length=256, default='')
     description=models.CharField(max_length=1000,default='')
 
@@ -31,3 +33,6 @@ class Test(models.Model):
         return self.name
 
 
+class TestLab(models.Model):
+    lab = models.ForeignKey(Lab1, on_delete=models.CASCADE)
+    test = models.ForeignKey(Test, on_delete=models.CASCADE)

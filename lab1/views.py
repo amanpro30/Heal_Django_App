@@ -16,7 +16,8 @@ from .models import Lab1, LabSlot1, Lab_complaint_feedback,BookingDateLab, Test1
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 from tests.models import Test
-
+from patient.models import Patient, LabBooking
+from samplecollector.models import SampleCollector
 
 
 def lab_home(request):
@@ -277,6 +278,74 @@ def delete_slot(request, slot_id):
     # print(request.get['slot_id'])
     Slot.objects.filter(pk=slot_id).delete()
     return redirect('/lab1/slots/')
+
+
+
+
+def show_bookings(request):
+    user=request.user
+    lab = Lab1.objects.get(user=user)
+    bookings=LabBooking.objects.filter(lab_id=lab.id).filter(is_completed=False)
+    if not bookings:
+        context= {
+            "status":"Hurray No Pending Appointments",
+            "profile":lab,
+            "bookings":bookings,
+        }
+    else:
+        context = {
+        "status":"Upcoming Appointments",
+        "bookings":bookings,
+        "profile":lab,
+        }
+    return render(request,'lab1/show_bookings.html',context=context)
+
+def assign_collector(request):
+    user=request.user
+    lab = Lab1.objects.get(user=user)
+    bookings=LabBooking.objects.filter(lab_id=lab.id).filter(is_completed=False)
+    if not bookings:
+        context= {
+            "status":"Hurray No Pending Appointments",
+            "profile":lab,
+            "bookings":bookings,
+        }
+    else:
+        context = {
+        "status":"Upcoming Appointments",
+        "bookings":bookings,
+        "profile":lab,
+        }
+    return render(request,'lab1/assign_collector.html',context=context)
+
+
+def select_collector(request, pk):
+    user=request.user
+    booking = LabBooking.objects.get(pk=pk)
+    samplecollectors=SampleCollector.objects.filter()
+    context= {
+            "status":"Hurray No Pending Appointments",
+            "bookings":booking,
+            "samplecollectors":samplecollectors,
+        }
+   
+    return render(request,'lab1/select_collector.html',context=context)
+
+
+
+
+def assign_collector_to_test(request, pk):
+    user=request.user
+    booking = LabBooking.objects.get(pk=pk)
+    samplecollectors=SampleCollector.objects.get()
+    context= {
+            "status":"Hurray No Pending Appointments",
+            "bookings":bookings,
+            "samplecollectors":samplecollectors,
+        }
+   
+    return render(request,'lab1/select_collector.html',context=context)
+
 
 
 

@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
-from patient.models import Patient
+
 from datetime import date
 from datetime import datetime
 from django.db.models.signals import pre_save
 from django.urls import reverse
+from samplecollector.models import *
 
 # Create your models here.
 class Lab1(models.Model):
@@ -35,18 +36,6 @@ class LabSlot1(models.Model):
     time_end = models.DateTimeField()
     def __str__(self):
         return f'{self.time_start} to {self.time_end}'
-
-# class AppointmentPhysio(models.Model):
-#     STATUS_CHOICES = (
-#         ('U', 'Upcoming'),
-#         ('C', 'Completed'),
-#     )
-#     # slot = models.OneToOneField(Slot, on_delete=models.CASCADE)
-#     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
-#     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-#     physiotherapist = models.ForeignKey(Physiotherapist, on_delete=models.CASCADE)
-#     def __str__(self):
-#         return f'Patient:{self.patient}, Physio:{self.physiotherapist}'   
 
 class BookingDateLab(models.Model):
     lab=models.ForeignKey(Lab1,on_delete=models.CASCADE, null=True,blank=True)
@@ -116,7 +105,15 @@ class Test1(models.Model):
     pre_test_information=models.CharField(max_length=256, default='')
     description=models.CharField(max_length=1000,default='')
     photo=models.ImageField(upload_to='media_/lab_pics/', null=True)
+    collector=models.ForeignKey(SampleCollector, on_delete=models.CASCADE, null=True,blank=True)
+
+    
+    def get_absolute_url(self):
+        return reverse('lab1:assign_collector_to_test', kwargs={'pk':self.pk})
+    
     
 
     def __str__(self):
         return self.name
+
+
