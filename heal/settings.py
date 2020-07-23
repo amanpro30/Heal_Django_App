@@ -55,6 +55,9 @@ INSTALLED_APPS = [
     'tests',
     'appointment',
     'users.apps.UsersConfig',
+    'report',
+    'dal',
+    'dal_select2',
     
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

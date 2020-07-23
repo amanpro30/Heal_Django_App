@@ -29,6 +29,7 @@ urlpatterns = [
     path('lab/',include('lab.urls')),
     path('nurse/', include('nurse.urls')),
     path('patient/', include('patient.urls')),
+    path('report/', include('report.urls')),
     url('',include('adminpage.urls')),
     path('', home_page),
     path('physiotherapist/',include('physiotherapist.urls')),
