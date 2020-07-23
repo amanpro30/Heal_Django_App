@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block body %}
+{% load crispy_forms_tags %}
+{% load static %}
+<style>
+  .text {
+    color: cyan;
+  }
+</style>
+<br><br>
+<div class="container w-90">
+
+  <br>
+  <div class="row">
+    <div class="col-md-8 card mb-4  mt-3 left  top"><br>  
+      <h1 class="text-center ">BLOG</h1>
+      <hr>
+
+      <div class="card-body">
+        <h1>{{ post.title }}</h1>
+        <hr>
+        <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
+        <img class="card-img-top" src="{{post.poster.url }}" alt="Card image cap">
+        <br><br>
+        <p class="card-text ">{{ post.content | safe }}</p>
+        <h6 class="peach-gradient ">.</h6>
+      </div>
+    </div>
+    {% comment %} {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %} {% endcomment %}
+
+  </div>
+
+
+  {% endblock  %}

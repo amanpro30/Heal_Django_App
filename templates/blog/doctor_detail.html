@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block head %}
+<style>
+    .display {
+        font-size: 30px;
+    }
+</style>
+
+{% endblock %}
+{% block body %}
+<br><br>
+<div class="container margin_60">
+
+    <div class="row ">
+        <!-- <center> -->
+            <div class="col-xl-9 col-lg-8">
+                <nav id="secondary_nav">
+                    <div class="container">
+                        <ul class="clearfix">
+                            <li><a href="#section_1" class="active">General info</a></li>
+                            <li><a href="#section_2">Reviews</a></li>
+                            <li><a href="#sidebar">Booking</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <div id="section_1">
+                    <div class="box_general_3">
+                        <div class="profile">
+                            <div class="row">
+                                <div class="col-lg-5 col-md-4" >
+                                    <figure >
+                                        <img src="{{doctor.posters.url}}" alt="dddd" class="img-fluid">
+                                    </figure>
+                                </div>
+                                
+                                <div class="col-lg-7 col-md-8" style="padding-left: 90px;">
+                                    <h1>DR. {{doctor.name}}</h1>
+                                    <span class="rating">
+                                        <span class="icon_star voted display text-warning"></span> &nbsp;
+                                        <span class="display">{{rcount}}</span> review by {{count}} user.
+                                        <a href="badges.html" data-toggle="tooltip" data-placement="top"
+                                            data-original-title="Badge Level" class="badge_list_1"><img
+                                                src="../../static/blog/img/badges/badge_1.svg" width="15" height="15"
+                                                alt=""></a>
+                                    </span>
+                                    <br><br>
+                                    <ul class="statistic">
+                                        <li>
+                                            <h6>&nbsp;&nbsp;&nbsp;Specializations&nbsp;&nbsp;&nbsp;</h6>
+                                            {{doctor.specializations}}
+                                        </li>
+                                        <br><br><br>
+                                        <li>
+                                            <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Experiance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </h6>
+                                            {{doctor.experiance}} Year
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+
+                        <hr>
+
+                        <div class="indent_title_in">
+                            <!-- <i class="pe-7s-cash"></i> -->
+                            <h3>Prices &amp; Payments</h3>
+                        </div>
+                        <div class="wrapper_indent">
+
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Service - Visit</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>New patient visit</td>
+                                            <td>&#8377 {{doctor.new_patient_price}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Old patient visit</td>
+                                            <td>&#8377 {{doctor.old_patient_price}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="section_2">
+                    <div class="box_general_3">
+                        <div class="reviews-container">
+                            <div class="row">
+
+                                {% for i in comment %}
+                                <div class="review-box clearfix">
+                                    <figure class="rev-thumb"><img src="/media/img/avatar.jpg" alt="">
+                                    </figure>
+                                    <div class="rev-content">
+                                        <div class="rating">
+                                            <span class="icon_star text-warning" style="font-size: 18;"></span>
+                                            {{i.review}}
+                                        </div>
+                                        <div class="rev-info" style="font-size: 13px;">
+                                            {{i.user}} -{{i.created_on}}
+                                        </div>
+                                        <div class="rev-text">
+                                            <p>
+                                                {{i.content}}<br>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <!-- ----------------------------------------------------------------------------------------------------------------------------------------- -->
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                            <hr>
+                            <div class="text-right"><a href="reply" class="btn_1">Submit review</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+<div id="toTop"></div>
+
+<script type="text/javascript" src="{% static 'blog/js/jquery-2.2.4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'blog/js/common_scripts.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'blog/js/functions.js' %}"></script>
+
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block head %}
+<style>
+
+    body {
+        font-family: "Roboto", sans-serif;
+        /* font-size: 18px; */
+        background-color: #fdfdfd;
+    }
+
+    .head_text {
+        color: white;
+    }
+
+
+    /* .card {
+        box-shadow: 0 16px 48px #E3E7EB;
+    } */
+
+    
+</style>
+{% endblock %}
+{% block body %}
+<div style="background-color:#ddd">
+
+    <br><br>
+    <div class="container navy-blue-skin">
+        <div class="row justify-content-md-center">
+            <div class="col-auto mr-auto col-xl-8">
+                <div class="card ">
+                    <div class="card-body ">
+                        <h1 class="text-center"> Add Blog Here!
+                            <hr>
+                        </h1>
+                        <form method='post' class="w-100">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <br>
+                            <button type="submit" class="btn aqua-gradient w-100" >Submit</button>
+                            <br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
