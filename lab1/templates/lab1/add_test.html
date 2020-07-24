@@ -4,7 +4,7 @@
 {% load static %}
 {% load widget_tweaks %}
 
-{% block test_list %}
+{% block add_test %}
 <script>
 {% comment %} function relocate_edit()
 {
@@ -105,10 +105,10 @@ function relocate_slots()
           <br><br>
 			    <div class="btn-group btn-group-md" style='padding: 2px 45px'>
 				    <!-- <button class="button button1">Send Message</button> -->
-            
+            <a href="" class="button button3" role="button">Add Test</a>
 			<a href="{% url 'lab1:lab_show_tests'  %}" class="button button3" role="button">View Tests</a>
 			<a href="#contact" class="button button3" role="button">Bookings</a>
-			<a href="{% url 'lab1:lab_assign_collector'  %}" class="button button3" role="button">Add Sample Collector</a>
+			<a href="#contact" class="button button3" role="button">Add Sample Collector</a>
 
 			
 
@@ -131,34 +131,31 @@ function relocate_slots()
 			    </div> -->
 
 			    	<div style="padding: 15px 45px;font-size: 16px;opacity: 0.5;">
-			    		LAB TESTs AVAILABLE
+			    		ADD TEST
 			    	</div><br>
 			    	<div class="container">
                         <div class="row">
-                            <table>
-                                <thead class="thead-light">
-                                    <tr>
-                                      <th>Booking Id</th>
-                                      <th>Date of booking</th>
-                                      <th>Paitent Name</th>
-                                      <th>Test Name</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
+                            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                  
+                                Name :{{ form.name | add_class:"form-control" }}
                                 
-                            
-                            {% for booking in bookings %}
-                            <tr>
-                                <th scope="row">{{booking.id}}</th>
-                                <td>{{booking.date}}</td>
-                                <td>{{booking.patient}}</td>
-                                <td>{{booking.test}}</td>
-                              </tr>
-                    
-                    
-                            {% endfor %} 
-                            </tbody>
-                        </table>
+                                House No :{{ form.house_no  | add_class:"form-control" }}
+                                Condition :{{ form.condition  | add_class:"form-control"}}
+                                Test Type :{{ form.test_type  | add_class:"form-control"}}
+                                Pre Test Information :{{ form.pre_test_information  | add_class:"form-control"}}
+                                Description :{{ form.description | add_class:"form-control"}}
+                                Price :{{ form.price | add_class:"form-control"}}
+                                Discounted Price :{{ form.discounted_price | add_class:"form-control"}}
+                  
+                  
+                                    <button type="submit" class="btn btn-dark form-control">Submit</button>
+                  
+                  
+                            </form>
+                           
+                           
+        
                         </div>
                     </div> 
 			    	

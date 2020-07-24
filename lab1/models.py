@@ -107,6 +107,7 @@ class Test1(models.Model):
     photo=models.ImageField(upload_to='media_/lab_pics/', null=True)
     collector=models.ForeignKey(SampleCollector, on_delete=models.CASCADE, null=True,blank=True)
 
+
     
     def get_absolute_url(self):
         return reverse('lab1:assign_collector_to_test', kwargs={'pk':self.pk})

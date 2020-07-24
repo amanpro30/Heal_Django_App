@@ -103,10 +103,11 @@ function relocate_slots()
           <br><br>
 			    <div class="btn-group btn-group-md" style='padding: 2px 45px'>
 				    <!-- <button class="button button1">Send Message</button> -->
-            <a href="" class="button button3" role="button">Add Test</a>
-			<a href="#contact" class="button button3" role="button">View Tests</a>
-			<a href="#contact" class="button button3" role="button">Bookings</a>
-			<a href="#contact" class="button button3" role="button">Add Sample Collector</a>
+            
+					<a href="{% url 'lab1:lab_show_tests'  %}" class="button button3" role="button">View Tests</a>
+					<a href="{% url 'lab1:lab_assign_collector'  %}" class="button button3" role="button">Add Sample Collector</a>
+					<a href="{% url 'lab1:lab_collected_samples'  %}" class="button button3" role="button">Collected Samples</a>
+					<a href="{% url 'lab1:lab_reports' %}" class="button button3" role="button">Reports</a>
 
 			
 

@@ -7,7 +7,8 @@ from datetime import date
 from datetime import datetime
 from django.db.models.signals import pre_save
 from django.urls import reverse
-
+from samplecollector.models import SampleCollector
+from tests.models import Test
 
 # Create your models here.
 class Patient(models.Model):
@@ -25,7 +26,7 @@ class Patient(models.Model):
     city = models.CharField(max_length=20)
     state = models.CharField(max_length=20)
     pin = models.IntegerField()
-    gender = models.CharField(max_length=1, choices=gender_choices)
+    gender = models.CharField(max_length=10, choices=gender_choices)
     dob = models.DateField()
     mob_no = models.BigIntegerField()
     
@@ -37,10 +38,18 @@ class Patient(models.Model):
 class LabBooking(models.Model):
 
     date=models.DateField(default=datetime.now)
-    is_completed = models.BooleanField(default=False)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True, blank=True)
     lab = models.ForeignKey(Lab1, on_delete=models.CASCADE, null=True, blank=True)
-    test = models.ForeignKey(Test1, on_delete=models.CASCADE, null=True, blank=True)
+    test = models.ForeignKey(Test, on_delete=models.CASCADE, null=True, blank=True)
+    collector=models.ForeignKey(SampleCollector, on_delete=models.CASCADE, null=True,blank=True)
+    status_choices = (
+        ('Booked', 'Booked'),
+        ('Sampled', 'Sampled'),
+        ('Collected', 'Collected'),
+        ('Completed', 'Completed'),
+    )
+    status = models.CharField(max_length=10, choices=status_choices)
+
 
     def get_absolute_url(self):
         return reverse('lab1:select_collector', kwargs={'pk':self.pk})

@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from .models import LabSlot1, Lab1
+from .models import LabSlot1, Lab1, Test1
 
 # class SlotForm(ModelForm):
 #     class Meta:
@@ -62,3 +62,9 @@ class SlotForm(forms.ModelForm):
         fields=['time_start',]
 
 
+class Add_Test(forms.ModelForm):
+    # email_id=forms.CharField(widget=forms.EmailInput)
+    # profile_photo= ImageField(blank=True, manual_crop="")
+    class Meta:
+        model=Test1
+        exclude=('user','collector',)

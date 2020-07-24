@@ -105,10 +105,11 @@ function relocate_slots()
           <br><br>
 			    <div class="btn-group btn-group-md" style='padding: 2px 45px'>
 				    <!-- <button class="button button1">Send Message</button> -->
-            <a href="" class="button button3" role="button">Add Test</a>
+            
 			<a href="{% url 'lab1:lab_show_tests'  %}" class="button button3" role="button">View Tests</a>
-			<a href="#contact" class="button button3" role="button">Bookings</a>
-			<a href="#contact" class="button button3" role="button">Add Sample Collector</a>
+			<a href="{% url 'lab1:lab_assign_collector'  %}" class="button button3" role="button">Add Sample Collector</a>
+			<a href="{% url 'lab1:lab_collected_samples'  %}" class="button button3" role="button">Collected Samples</a>
+			<a href="{% url 'lab1:lab_reports' %}" class="button button3" role="button">Reports</a>
 
 			
 
@@ -144,7 +145,7 @@ function relocate_slots()
                           <h4 class="card-title">{{test.name}}</h4>
                           
                           <p class="card-text">
-                            <i><span style="font-size: 10px;">by <a href="#">{{test.test_type}}</a></span></i><br>
+                            <i><span style="font-size: 10px;">by <a href="#">{{test.test_type}}{{test.test_type}}</a></span></i><br>
                             <span style="color: red;"><i class="fa fa-rupee" style="font-size: 14px;"></i><s>{{ test.price }}</s></span>
                            <span style="color: red;"><i class="fa fa-rupee" style="font-size: 14px;"></i>{{ test.discounted_price }}</span>
                            

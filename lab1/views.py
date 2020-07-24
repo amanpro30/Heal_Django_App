@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.db import IntegrityError
 from django.utils.decorators import method_decorator
-from .forms import Add_Profile, Modify_Profile
+from .forms import Add_Profile, Modify_Profile, Add_Test
 from .models import Lab1, LabSlot1, Lab_complaint_feedback,BookingDateLab, Test1
 from django.http import HttpResponseRedirect
 from django.utils import timezone
@@ -20,12 +20,12 @@ from patient.models import Patient, LabBooking
 from samplecollector.models import SampleCollector
 
 
+
 def lab_home(request):
     user = request.user 
     print(user)
     profile = Lab1.objects.get(user=user)  
     fb= Lab_complaint_feedback.objects.all()   
-    # print(fb)
     context={
            'profile':profile
     }
@@ -266,20 +266,56 @@ class ComplaintFeedbackCreate(CreateView):
 		#     "object":appointment,
 		# }
 		# return render(self.request,'booking/booking_confirmation.html', context=context)
-def show_complaint_feedback(request):
-    user=request.user
-    profile = Lab1.objects.get(user=user)
-    lab_owner=profile.lab_owner
-    feedback=Lab_complaint_feedback.objects.filter(lab=profile)
-    # print(feedback)
-    return render(request,'lab1/show_profile.html',{'feedbacks':feedback,'lab_owner':lab_owner,})
+def show_complaint_feedback(request):            
+    user=request.user    
+    profile = Lab1.objects.get(user=user)    
+    lab_owner=profile.lab_owner    
+    feedback=Lab_complaint_feedback.objects.filter(lab=profile)    
+    # print(feedback)     
+    return render(request,'lab1/show_profile.html',{'feedbacks':feedback,'lab_owner':lab_owner,})   
 
-def delete_slot(request, slot_id):
+def delete_slot(request, slot_id):   
     # print(request.get['slot_id'])
     Slot.objects.filter(pk=slot_id).delete()
     return redirect('/lab1/slots/')
 
+def collected_samples(request):
+    user=request.user
+    lab = Lab1.objects.get(user=user)
+    bookings=LabBooking.objects.filter(lab_id=lab.id).filter(status='Collected')
+    if not bookings:
+        context= {
+            "status":"Hurray No Pending Appointments",
+            "profile":lab,
+            "bookings":bookings,
+           
+        }
+    else:
+        context = {
+        "status":"Upcoming Appointments",
+        "bookings":bookings,
+        "profile":lab,
+        }
+    return render(request,'lab1/collected_samples1.html',context=context)
 
+def reports(request):
+    user=request.user
+    lab = Lab1.objects.get(user=user)
+    bookings=LabBooking.objects.filter(lab_id=lab.id).filter(status='Completed')
+    if not bookings:
+        context= {
+            "status":"No Appointments",
+            "profile":lab,
+            "bookings":bookings,
+           
+        }
+    else:
+        context = {
+        "status":"Completed Appointments",
+        "bookings":bookings,
+        "profile":lab,
+        }
+    return render(request,'lab1/reports.html',context=context)
 
 
 def show_bookings(request):
@@ -303,12 +339,13 @@ def show_bookings(request):
 def assign_collector(request):
     user=request.user
     lab = Lab1.objects.get(user=user)
-    bookings=LabBooking.objects.filter(lab_id=lab.id).filter(is_completed=False)
+    bookings=LabBooking.objects.filter(lab_id=lab.id).filter(status='Booked')
     if not bookings:
         context= {
             "status":"Hurray No Pending Appointments",
             "profile":lab,
             "bookings":bookings,
+           
         }
     else:
         context = {
@@ -334,18 +371,44 @@ def select_collector(request, pk):
 
 
 
-def assign_collector_to_test(request, pk):
+def assign_collector_to_test(request, collector_id, booking_id):
     user=request.user
-    booking = LabBooking.objects.get(pk=pk)
-    samplecollectors=SampleCollector.objects.get()
+    bookings = LabBooking.objects.get(pk=booking_id)
+    samplecollectors=SampleCollector.objects.get(pk=collector_id)
+    bookings.collector=samplecollectors
+    bookings.status="Sampled"
+    bookings.save()
     context= {
             "status":"Hurray No Pending Appointments",
             "bookings":bookings,
             "samplecollectors":samplecollectors,
         }
    
-    return render(request,'lab1/select_collector.html',context=context)
+    return redirect(reverse('lab1:lab_assign_collector'))
 
 
 
 
+def add_test(request):
+    user = request.user
+    profile=Lab1.objects.get(user=user)
+    if request.method=="POST":   
+        form=Add_Test(request.POST, request.FILES ,initial={'user':user,})
+
+        if form.is_valid():
+            profile_item=form.save(commit=False)
+            profile_item.user = user
+            profile_item.save()
+
+            # return render(request, "physiotherapist/verification.html", {})
+            return redirect('/lab1/home/')
+
+
+    else:
+
+        form=Add_Test(initial={'user':user,})
+        context = {
+            "profile":profile,
+            "form":form,
+        }
+    return render(request,'lab1/add_test.html',context=context)

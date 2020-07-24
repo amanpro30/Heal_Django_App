@@ -6,4 +6,5 @@ admin.site.register(Lab1)
 admin.site.register(LabSlot1)
 admin.site.register(BookingDateLab)
 admin.site.register(Test1)
+
 # admin.site.register(AppointmentPhysiotherapist)
