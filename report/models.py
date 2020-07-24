@@ -2,10 +2,12 @@ from django.db import models
 from django.urls import reverse
 # from doctor_profile.models import Profile
 from django.urls import reverse
-
+from lab1.models import Lab1
+# from patient.models import LabBooking
 
 class Report(models.Model):
-    # doctor=models.ForeignKey(Profile,on_delete=models.CASCADE,null=True,blank=True)
+    lab=models.ForeignKey(Lab1,on_delete=models.CASCADE,null=True,blank=True)
+    # booking=models.ForeignKey(LabBooking,on_delete=models.CASCADE,null=True,blank=True)
     report_id=models.CharField(max_length=30,unique=True)
     report_date=models.DateTimeField(auto_now_add=True)
     pdf= models.FileField(upload_to='media_/pdf/', null=True, blank=True)

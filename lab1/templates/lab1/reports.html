@@ -87,7 +87,7 @@
                             <td>{{booking.date}}</td>
                             <td>{{booking.patient}}</td>
                             <td>{{booking.test}}</td>
-                            <td><a href="{% url 'lab1:select_collector' booking.id %}">View Report</a></td>
+                            <td><a href="/media/{{booking.report.pdf}}"> Download Report </a></td>
                         
                           </tr>
                          

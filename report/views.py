@@ -22,6 +22,10 @@ from pprint import pprint
 # Create your views here.
 from django.contrib.auth.models import User
 import time
+from lab1.models import Lab1
+from patient.models import LabBooking
+from pprint import pprint
+
 def index(request):
     return render(request,'report/report_home.html')
 
@@ -50,7 +54,7 @@ class ReportCreate(CreateView):
     fields=['report_id',]
 #################################TO PASS INITIAL VALUES ############
     def get_initial(self):
-        #appointment_id=appointment_id
+        booking_id=self.kwargs['booking_id']
         max_id=Report.objects.all().aggregate(Max('report_id'))
         if list(max_id.values())[0] == None:
             value=0
@@ -61,37 +65,39 @@ class ReportCreate(CreateView):
 
 
         #print(value)
-        #appointment_id=self.kwargs['appointment_id']
+        booking_id=self.kwargs['booking_id']
         initial = super(ReportCreate, self).get_initial()
         initial.update({'report_id': value})
+        pprint('*')
         return initial
 
     def get_context_data(self, **kwargs):
         context = super(ReportCreate, self).get_context_data(**kwargs)
-        # user=self.request.user
-        # profile = Profile.objects.get(user=user)
-        # appointment = AppointmentDetials.objects.get(pk=self.kwargs['appointment_id'])
-        # context['appointment']=appointment
-        # context['doctor']=profile
+        user = self.request.user
+        lab = Lab1.objects.get(user=user)
+        booking = LabBooking.objects.get(id=self.kwargs['booking_id'])
+        context['booking']= booking
+        context['lab']= lab
+        pprint(context)
         return context
 
 
 
     def form_valid(self, form):
         #event = Event.objects.get(pk=self.kwargs['appointment_id'])
-        # user=self.request.user
-        # profile = Profile.objects.get(user=user)
-        #appointment_id=int(self.kwargs['appointment_id'])
+        user=self.request.user
+        lab = Lab1.objects.get(user=user)
+        booking_id=int(self.kwargs['booking_id'])
 
         #print('**')
         report = form.save(commit=False)
 
-        # prescription.doctor = profile
+        report.lab = Lab1.objects.get(user=user)
         report=form.save()
-        # appointment = AppointmentDetials.objects.get(pk=self.kwargs['appointment_id'])
-        # appointment.is_attended=True
-        # appointment.prescription=prescription
-        # appointment.save()
+        booking = LabBooking.objects.get(id=self.kwargs['booking_id'])
+        booking.status = 'Completed'
+        booking.report = report
+        booking.save()
         return super(ReportCreate, self).form_valid(form)
 
 # @login_required(login_url=reverse_lazy('login'))

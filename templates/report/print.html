@@ -56,10 +56,12 @@
          <div class='details'>
              <!-- Patient Name:{{prescription.appointment.paitent.first_name}} {{paitent.appointment.paitent.last_name}}<br/>
              Doctor Name :Dr. {{prescription.doctor.first_name}} {{prescription.doctor.last_name}}<br> -->
-             Date and Time:{{report.report_date}}
+             Date and Time:{{report.report_date}} <br>
+             Lab : {{report.lab.lab_name}}
+             
              <br><br>
              Report Computer Generated Signature Not Required
-             <hr class='hrItem' />
+             <!-- <hr class='hrItem' /> -->
          </div>
      </div>
      <div class="container-fluid songs-container">
@@ -81,18 +83,18 @@
                                  <th>Test Name</th>
                                  <th>Value</th>
                                  <th>Unit</th>
-                                 <th>Min Value</th>
-                                 <th>Max value</th>
+                                 <th>Normal Min Value</th>
+                                 <th>Normal Max value</th>
                              </tr>
                              </thead>
                              <tbody>
                              {% for item in report.item_set.all %}
                                  <tr>
-                                     <td>&nbsp&nbsp&nbsp&nbsp&nbsp{{ item.lab_test_name }}</td>
-                                     <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ item.value}}</td>
-                                     <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ item.lab_test.unit}}</td>
-                                     <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ item.lab_test.min_value}}</td>
-                                     <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ item.lab_test.max_value}}</td>
+                                     <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ item.lab_test_name }}</td>
+                                     <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ item.value}}</td>
+                                     <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ item.lab_test.unit}}</td>
+                                     <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ item.lab_test.min_value}}</td>
+                                     <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ item.lab_test.max_value}}</td>
 
                                  </tr>
                                   <hr class='hrItem' />
