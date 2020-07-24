@@ -85,7 +85,7 @@
                             <th scope="row">{{booking.id}}</th>
                             <td>{{booking.date}}</td>
                             <td>{{booking.patient}}</td>
-                            <td><a href="">Collect</a></td>
+                            <td><a href="{% url 'samplecollector:collector_collected_details' booking_id=booking.id %}">View Details</a></td>
                         
                           </tr>
                          

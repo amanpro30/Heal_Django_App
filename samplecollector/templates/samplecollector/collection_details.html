@@ -47,7 +47,7 @@
         </div>
       </div>
     </nav>
-  <div class="container">
+  <div class="container-fluid">
           <div class="col-sm-12 col-md-12">
 
               <div class="panel panel-default">
@@ -70,15 +70,21 @@
                             <thead class="thead-light">
                                 <tr>
                                   <th>Paitent Name:   </th>
-                                  <th>{{ booking.patient }}</th>
+                                  <th>{{ patient_object.first_name }} {{ patient_object.last_name }}</th>
                                   <th>Lab to be submitted:</th>
-                                  <th>{{ booking.lab }}</th>
+                                  <th>{{ lab_object.lab_name }}</th>
                                 </tr>
                                 <tr>
                                     <th>Paitent Address:   </th>
-                                    <th>paitent address</th>
-                                    <th>Lab Adress:</th>
-                                    <th></th>
+                                    <th>House No. {{ patient_object.house_no }},{{ patient_object.city }},{{ patient_object.state }}{{ patient_object.pin }}</th>
+                                    <th>Lab Address:</th>
+                                    <th>{{ lab_object.lab_address }}, {{ lab_object.city }},{{ lab_object.state }}{{ lab_object.pin }}</th>
+                                  </tr>
+                                  <tr>
+                                    <th>Paitent Phone No:   </th>
+                                    <th>{{ patient_object.mob_no }}</th>
+                                    <th>Lab Phone No:</th>
+                                    <th>{{ lab_object.mobile_no }}</th>
                                   </tr>
                                   <tr>
                                     <th>Type of Sample:   </th>
@@ -97,7 +103,7 @@
                         <!-- <button class="button button1">Send Message</button> -->
                         
                         
-                        <a href="" class="button-success button3 btn btn-primary" role="button">Sample Collection Done</a>
+                        <a href="{% url 'samplecollector:confirm_collection' booking_id=booking.id %}" class="button-success button3 btn btn-primary" role="button">Sample Collection Done</a>
                     
                     </div>
                   </div>
