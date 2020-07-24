@@ -31,7 +31,22 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'crispy_forms',
     'blog',
+    'patient',
+    'physiotherapist',
+    'nurse',
+    'lab',
+    'tests',
+    'appointment',
+    'users.apps.UsersConfig',
+    'report',
+    'dal',
+    'dal_select2',
+    'lab1',
+    'samplecollector',
+    
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -68,6 +83,16 @@ WSGI_APPLICATION = 'heal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'heal',
+#         'USER': 'postgres',
+#         'PASSWORD': 'password',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5434',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -129,7 +154,7 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400 # 1 day in seconds
 ACCOUNT_LOGOUT_REDIRECT_URL ='/accounts/login/'
-LOGIN_REDIRECT_URL = '/home/' # default to /accounts/profile 
+LOGIN_REDIRECT_URL = 'adminpage:adminpage' # default to /accounts/profile 
 SITE_ID = 1
 
 SOCIALACCOUNT_QUERY_EMAIL=ACCOUNT_EMAIL_REQUIRED
