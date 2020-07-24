@@ -33,6 +33,8 @@ urlpatterns = [
     url('',include('adminpage.urls')),
     path('', home_page),
     path('physiotherapist/',include('physiotherapist.urls')),
+    path('lab1/',include('lab1.urls')),
+    path('samplecollector/',include('samplecollector.urls')),
 ]
 
 

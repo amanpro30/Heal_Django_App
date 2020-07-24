@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'report',
     'dal',
     'dal_select2',
+    'lab1',
+    'samplecollector',
     
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

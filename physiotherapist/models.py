@@ -8,7 +8,7 @@ from django.urls import reverse
 
 # Create your models here.
 class Physiotherapist(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     gender_choices = (
         ('M', 'Male'),
         ('F', 'Female'),
