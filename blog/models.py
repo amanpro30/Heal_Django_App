@@ -35,14 +35,14 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
 
-class Doctor(models.Model):
-    user=models.ForeignKey(User, on_delete=models.CASCADE)
-    name=models.CharField(max_length=50)
-    posters = models.ImageField(blank=True)
-    specializations=models.CharField(max_length=50)
-    experiance=models.IntegerField()
-    new_patient_price=models.IntegerField()
-    old_patient_price=models.IntegerField()
+# class Doctor(models.Model):
+#     user=models.ForeignKey(User, on_delete=models.CASCADE)
+#     name=models.CharField(max_length=50)
+#     posters = models.ImageField(blank=True)
+#     specializations=models.CharField(max_length=50)
+#     experiance=models.IntegerField()
+#     new_patient_price=models.IntegerField()
+#     old_patient_price=models.IntegerField()
     
 
 

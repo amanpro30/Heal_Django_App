@@ -11,12 +11,12 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def add_blog(request):
     
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post=form.save(commit=False)
             post.author= request.user
             post.save()
-            return redirect("/blog")
+            return redirect("/blog/b/")
     else:
         form=PostForm()
     return render(request, 'blog/blog_post.html', {'form':form})

@@ -35,7 +35,7 @@
                         <h1 class="text-center"> Add Blog Here!
                             <hr>
                         </h1>
-                        <form method='post' class="w-100">
+                        <form method='post' class="w-100" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{ form|crispy }}
                             <br>
