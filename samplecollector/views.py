@@ -16,6 +16,7 @@ from tests.models import Test
 from patient.models import Patient, LabBooking
 from .models import *
 from .forms import *
+from lab1.models import Lab1
 
 
 
@@ -106,8 +107,16 @@ def collected_samples(request):
 def collection_details(request, booking_id):
     user=request.user
     booking = LabBooking.objects.get(pk=booking_id)
+    patient_id=booking.patient.id
+    lab_id=booking.lab.id
+    patient_object=Patient.objects.get(pk=patient_id)
+    lab_object=Lab1.objects.get(pk=patient_id)
+    print(patient_id)
     context= {
             "booking":booking,
+            "patient_object":patient_object,
+            "lab_object":lab_object,
+
         }
    
     return render(request,'samplecollector/collection_details.html',context=context)
@@ -115,25 +124,37 @@ def collection_details(request, booking_id):
 
 
 
-# def assign_collector_to_test(request, collector_id, booking_id):
-#     user=request.user
-#     bookings = LabBooking.objects.get(pk=booking_id)
-#     samplecollectors=SampleCollector.objects.get(pk=collector_id)
-#     bookings.collector=samplecollectors
-#     bookings.status="Sampled"
-#     bookings.save()
-#     context= {
-#             "status":"Hurray No Pending Appointments",
-#             "bookings":bookings,
-#             "samplecollectors":samplecollectors,
-#         }
+def confirm_collection(request, booking_id):
+    user=request.user
+    bookings = LabBooking.objects.get(pk=booking_id)
+    bookings.status="Collected"
+    bookings.save()
+    context= {
+            "status":"Hurray No Pending Appointments",
+            "bookings":bookings,
+        }
    
-#     return redirect(reverse('lab1:lab_assign_collector'))
+    return redirect(reverse('samplecollector:collector_assigned_samples'))
+
+def collector_collected_details(request, booking_id):
+    user=request.user
+    booking = LabBooking.objects.get(pk=booking_id)
+    patient_id=booking.patient.id
+    lab_id=booking.lab.id
+    patient_object=Patient.objects.get(pk=patient_id)
+    lab_object=Lab1.objects.get(pk=patient_id)
+    print(patient_id)
+    context= {
+            "booking":booking,
+            "patient_object":patient_object,
+            "lab_object":lab_object,
+
+        }
+   
+    return render(request,'samplecollector/collector_collected_details.html',context=context)
 
 
-
-
-# def add_test(request):
+# def add_test(request):collector_collected_details
 #     user = request.user
 #     profile=Lab1.objects.get(user=user)
 #     if request.method=="POST":   
