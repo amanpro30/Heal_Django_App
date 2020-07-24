@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect, HttpResponse, get_object_or_404
 from .models import *
+from nurse.models import *
 from django.contrib.auth.models import User
 from .forms import *
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -39,10 +40,12 @@ def show(request):
     return render(request, "blog/index.html", {'post1':post1, 'post2':post2})
 
 
-def doctor_detail(request, **kwargs):
+#================Nurse===================#
+
+def nurse_detail(request, **kwargs):
     id=kwargs['id']
-    doctor=get_object_or_404(Doctor, id=int(id))
-    comment=Comment.objects.filter(doctor=doctor)
+    nurse=get_object_or_404(Nurse, id=int(id))
+    comment=Comment.objects.filter(doctor=nurse)
 
     rcount=0.0
     count=0
@@ -56,10 +59,10 @@ def doctor_detail(request, **kwargs):
     rcount=rcount/count
     rcount = "{0:0.1f}".format(rcount)
 
-    arg = {'doctor':doctor, 'comment':comment, 'rcount':rcount, 'count':count}
+    arg = {'nurse':nurse, 'comment':comment, 'rcount':rcount, 'count':count}
     return render(request, "blog/doctor_detail.html", arg)
 
-def doctor_reply(request, **kwargs):
+def nurse_reply(request, **kwargs):
     
     id=kwargs['id']
     if request.method=="POST":
@@ -67,22 +70,16 @@ def doctor_reply(request, **kwargs):
         review=form['review']
         content=form['content']
         user=User.objects.get(username=request.user)
-        doctor1=Doctor.objects.get(id=int(id))
+        doctor1=Nurse.objects.get(id=int(id))
         arg={'doctor':doctor1}
         reply = Comment.objects.create(user=user, doctor=doctor1, review=review, content=content)
         reply.save()
-        return redirect('/blog/doctor/'+id+"/")
+        return redirect('/blog/nurse/'+id+"/")
 
 
     return render(request, 'blog/comment.html')
 
-def doctor(request):
-    specializations=request.GET.get('specializations')
-    doctor= Doctor.objects.all()
-    
-    if specializations != None:
-        doctor= Doctor.objects.filter(specializations=specializations)
-    
-
+def nurse(request):
+    nurse= Nurse.objects.all()
         
-    return render(request, 'blog/doctor.html', {'doctor':doctor})
+    return render(request, 'blog/doctor.html', {'doctor':nurse})

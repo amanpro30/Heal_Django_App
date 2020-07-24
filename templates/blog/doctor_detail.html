@@ -31,14 +31,14 @@
                             <div class="row">
                                 <div class="col-lg-5 col-md-4" >
                                     <figure >
-                                        <img src="{{doctor.posters.url}}" alt="dddd" class="img-fluid">
+                                        <img src="{{nurse.profile_photo.url}}" alt="dddd" class="img-fluid">
                                     </figure>
                                 </div>
                                 
-                                <div class="col-lg-7 col-md-8" style="padding-left: 90px;">
-                                    <h1>DR. {{doctor.name}}</h1>
+                                <div class="col-lg-7 col-md-8" style="padding-left: 90px;"><br><br>
+                                    <h1> {{nurse.first_name}} {{nurse.last_name}}</h1>
                                     <span class="rating">
-                                        <span class="icon_star voted display text-warning"></span> &nbsp;
+                                        <span class="icon_star voted display text-warning" style="font-size: 30px;"></span> &nbsp;
                                         <span class="display">{{rcount}}</span> review by {{count}} user.
                                         <a href="badges.html" data-toggle="tooltip" data-placement="top"
                                             data-original-title="Badge Level" class="badge_list_1"><img
@@ -47,54 +47,29 @@
                                     </span>
                                     <br><br>
                                     <ul class="statistic">
-                                        <li>
+                                        <!-- <li>
                                             <h6>&nbsp;&nbsp;&nbsp;Specializations&nbsp;&nbsp;&nbsp;</h6>
                                             {{doctor.specializations}}
-                                        </li>
-                                        <br><br><br>
+                                        </li> -->
+                                        <br>
                                         <li>
-                                            <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Experiance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Experience&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             </h6>
-                                            {{doctor.experiance}} Year
+                                            {{nurse.experience}} Year
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
-                        <hr>
+                        <!-- <hr> -->
 
+                        <!-- <hr> -->
 
-                        <hr>
+                        
+                    </div><br>
+                    <h1 class="text-info">Users Review</h1><hr>
 
-                        <div class="indent_title_in">
-                            <!-- <i class="pe-7s-cash"></i> -->
-                            <h3>Prices &amp; Payments</h3>
-                        </div>
-                        <div class="wrapper_indent">
-
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Service - Visit</th>
-                                            <th>Price</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>New patient visit</td>
-                                            <td>&#8377 {{doctor.new_patient_price}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Old patient visit</td>
-                                            <td>&#8377 {{doctor.old_patient_price}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div id="section_2">

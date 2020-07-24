@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
-
+from nurse.models import *
 
 
 class Post(models.Model):
@@ -48,7 +48,7 @@ class Doctor(models.Model):
 
 class Comment(models.Model):
     user = models.ForeignKey(User, default="", on_delete=models.SET_NULL, null=True)
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(Nurse, on_delete=models.CASCADE)
     review = models.FloatField(default=1)
     content= models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
