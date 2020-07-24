@@ -19,6 +19,8 @@ function relocate_slots()
 }
 </script> {% endcomment %}
 </script>
+
+
 <!-- NAV BAR -->
       <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
       <div class="container">
@@ -57,6 +59,13 @@ function relocate_slots()
 		    margin: 4px 2px;
 		    cursor: pointer;
 		}
+		.card{
+    box-shadow: 0 16px 48px #E3E7EB;
+    }
+
+	.card1{
+    box-shadow: #E3E7EB;
+    }
 		.button:hover{
 			background-color: rgb(244, 173, 66);
 			color: white;
@@ -101,7 +110,7 @@ function relocate_slots()
 				</div>
 
           <br><br>
-			    <div class="btn-group btn-group-md" style='padding: 2px 45px'>
+			    <div class="btn-group btn-group-md card1" style='padding: 2px 45px'>
 				    <!-- <button class="button button1">Send Message</button> -->
             
 					<a href="{% url 'lab1:lab_show_tests'  %}" class="button button3" role="button">View Tests</a>
@@ -120,19 +129,19 @@ function relocate_slots()
 			    	<br><br>
 
 
-          <div style='padding: 0px 45px'>
+          <div style='padding: 0px 45px' >
           <hr>
           </div>
 			    	<br>
 
 			    <!-- <div style="display: none;" id="Experience">
 			    	<span style="font-size: 17px;">Doctors's experience will be here.</span>
-			    </div> -->
-
+			    </div> --><div class="card">
+				<div >
 			    	<div style="padding: 5px 45px;font-size: 16px;opacity: 0.5;">
 			    		LAB BASIC INFORMATION
 			    	</div><br>
-			    	<div>
+			    	
 			    		<table>
 			    			<tr>
 			    				<td>Lab Owner</td>
@@ -143,7 +152,9 @@ function relocate_slots()
 			    				<td>{{profile.lab_registration}}</td>
 			    			</tr>
 			    		</table>
-			    	</div><br>
+					</div><br>
+					
+				
 			    	<div style="padding: 15px 45px;font-size: 16px;opacity: 0.5;">
               <a name="contact"></a>
 			    		CONTACT INFORMATION
@@ -183,7 +194,7 @@ function relocate_slots()
 			</div>
 		</div>
 	</div>
-
+</div>
 <br><br><br><br>
 
 

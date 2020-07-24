@@ -55,8 +55,12 @@ INSTALLED_APPS = [
     'tests',
     'appointment',
     'users.apps.UsersConfig',
+    'report',
+    'dal',
+    'dal_select2',
     'lab1',
     'samplecollector',
+    'blog',
     
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -116,6 +120,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

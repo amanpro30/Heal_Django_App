@@ -24,12 +24,16 @@
     crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css" />
-
+   <style>
+     .card{
+    box-shadow: 0 16px 48px #E3E7EB;
+    }
+   </style>
 
     <title>Authentication System</title>
   </head>
   <body>
-
+  
    
   
     {% block register %}{% endblock %}
@@ -58,7 +62,21 @@
      {% block collected_samples %}{% endblock %}
      {% block samplecollector_homepage %}{% endblock %}
      {% block assigned_samples %}{% endblock %}
+     {% block blog %}{% endblock %}
 
+
+    {% block nurse_homepage %}{% endblock %}
+    {% block nurse_home %}{% endblock %}
+    {% block nurse_slot %}{% endblock %}
+    {% block nurse_show_slots %}{% endblock %}
+    {% block nurse_complaint %}{% endblock %}
+    {% block nurse_show_feedback %}{% endblock %}
+    {% block nurse_show_slot %}{% endblock %}
+    {% block nurse_edit_profile %}{% endblock %}
+    {% block nurse_show_appointment %}{% endblock %}
+    {% block report_detail %}{% endblock %}
+    {% block report_home %}{% endblock %}
+    {% block report_item %}{% endblock %}
 
   
 

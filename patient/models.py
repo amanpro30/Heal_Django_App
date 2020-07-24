@@ -9,6 +9,7 @@ from django.db.models.signals import pre_save
 from django.urls import reverse
 from samplecollector.models import SampleCollector
 from tests.models import Test
+from report.models import Report
 
 # Create your models here.
 class Patient(models.Model):
@@ -49,7 +50,7 @@ class LabBooking(models.Model):
         ('Completed', 'Completed'),
     )
     status = models.CharField(max_length=10, choices=status_choices)
-
+    report = models.ForeignKey(Report, on_delete=models.CASCADE, null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse('lab1:select_collector', kwargs={'pk':self.pk})
