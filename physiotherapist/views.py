@@ -16,6 +16,7 @@ from .forms import Add_Profile, Modify_Profile
 from .models import BookingDate,Slot, Physiotherapist_complaint_feedback
 from django.http import HttpResponseRedirect
 from django.utils import timezone
+from appointment.models import AppointmentPhysio
 
 
 def physio_home(request):
@@ -257,3 +258,71 @@ def delete_slot(request, slot_id):
     # print(request.get['slot_id'])
     Slot.objects.filter(pk=slot_id).delete()
     return redirect('/physiotherapist/slots/')
+
+
+def show_appointments(request):
+    user=request.user
+    Physiotherapist = Physiotherapist.objects.get(user=user)
+    appointments= PhysioAppoitments.objects.filter(physiotherapist_id=Physiotherapist).filter(is_attended=False).order_by('date').order_by('time')
+    first_name=Physiotherapist.first_name
+    last_name=Physiotherapist.last_name
+    print(user)
+    print(appointments)
+    #print(prescriptions[0].pdf)
+    #print(prescriptions[0].prescription_date)
+    if not appointments:
+        context="Hurray No Pending Appointments"
+    else:
+        context="Pending Appointments"
+    # print(appointments[0].date)
+    # print(appointments[0].time)
+    return render(request,'phyiotherapist/physio_appointments.html',{'context':context,'appointments':appointments,'first_name':first_name,'last_name':last_name})
+
+def attend_appointment(request, appointment_id):
+    # print(request.get['slot_id'])
+    appointment= PhysioAppoitments.objects.get(id=appointment_id)
+    appointment.is_attended = True
+    return redirect('/physiotherapist/home/')    
+
+def show_appointments(request):
+    user=request.user
+    physiotherapist = Physiotherapist.objects.get(user=user)
+    appointments= AppointmentPhysio.objects.filter(physiotherapist_id=physiotherapist).filter(status=False).order_by('date').order_by('slot_id')
+    first_name=physiotherapist.first_name
+    last_name=physiotherapist.last_name
+    print(user)
+    print(appointments)
+    #print(prescriptions[0].pdf)
+    #print(prescriptions[0].prescription_date)
+    if not appointments:
+        context="Hurray No Pending Appointments"
+    else:
+        context="Pending Appointments"
+    # print(appointments[0].date)
+    # print(appointments[0].time)
+    return render(request,'physiotherapist/physio_appointments.html',{'context':context,'appointments':appointments,'first_name':first_name,'last_name':last_name})
+
+def work_history(request):
+    user=request.user
+    physiotherapist = Physiotherapist.objects.get(user=user)
+    appointments= AppointmentPhysio.objects.filter(physiotherapist_id=physiotherapist).filter(status=True).order_by('date').order_by('slot_id')
+    first_name=physiotherapist.first_name
+    last_name=physiotherapist.last_name
+    print(user)
+    print(appointments)
+    #print(prescriptions[0].pdf)
+    #print(prescriptions[0].prescription_date)
+    if not appointments:
+        context="Hurray No Pending Appointments"
+    else:
+        context="Pending Appointments"
+    # print(appointments[0].date)
+    # print(appointments[0].time)
+    return render(request,'physiotherapist/work_history.html',{'context':context,'appointments':appointments,'first_name':first_name,'last_name':last_name})    
+
+def attend_appointment(request, appointment_id):
+    # print(request.get['slot_id'])
+    appointment= AppointmentPhysio.objects.get(id=appointment_id)
+    appointment.status = True
+    appointment.save()
+    return redirect('/physiotherapist/home/')      

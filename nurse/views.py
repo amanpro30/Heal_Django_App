@@ -16,7 +16,7 @@ from .forms import Add_Profile, Modify_Profile
 from .models import BookingDate,Slot, Nurse_complaint_feedback
 from django.http import HttpResponseRedirect
 from django.utils import timezone
-
+from appointment.models import AppointmentNurse
 
 def physio_home(request):
     user = request.user
@@ -257,3 +257,46 @@ def delete_slot(request, slot_id):
     # print(request.get['slot_id'])
     Slot.objects.filter(pk=slot_id).delete()
     return redirect('/nurse/slots/')
+
+def show_appointments(request):
+    user=request.user
+    nurse = Nurse.objects.get(user=user)
+    appointments= AppointmentNurse.objects.filter(nurse_id=nurse).filter(status=False).order_by('date').order_by('slot_id')
+    first_name=nurse.first_name
+    last_name=nurse.last_name
+    print(user)
+    print(appointments)
+    #print(prescriptions[0].pdf)
+    #print(prescriptions[0].prescription_date)
+    if not appointments:
+        context="Hurray No Pending Appointments"
+    else:
+        context="Pending Appointments"
+    # print(appointments[0].date)
+    # print(appointments[0].time)
+    return render(request,'nurse/nurse_appointments.html',{'context':context,'appointments':appointments,'first_name':first_name,'last_name':last_name})
+
+def work_history(request):
+    user=request.user
+    physiotherapist = Nurse.objects.get(user=user)
+    appointments= AppointmentNurse.objects.filter(nurse_id=physiotherapist).filter(status=True).order_by('date').order_by('slot_id')
+    first_name=nurse.first_name
+    last_name=nurse.last_name
+    print(user)
+    print(appointments)
+    #print(prescriptions[0].pdf)
+    #print(prescriptions[0].prescription_date)
+    if not appointments:
+        context="Hurray No Pending Appointments"
+    else:
+        context="Pending Appointments"
+    # print(appointments[0].date)
+    # print(appointments[0].time)
+    return render(request,'nurse/work_history.html',{'context':context,'appointments':appointments,'first_name':first_name,'last_name':last_name})    
+
+def attend_appointment(request, appointment_id):
+    # print(request.get['slot_id'])
+    appointment= AppointmentNurse.objects.get(id=appointment_id)
+    appointment.status = True
+    appointment.save()
+    return redirect('/nurse/home/')  
